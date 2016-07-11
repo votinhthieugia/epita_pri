@@ -6,7 +6,8 @@ import java.awt.Graphics2D;
 public class Ruler {
 
 	int x1, x2, y1, y2;
-	private final double TICK_DIST = 20;
+	private final int TICK_DIST = 20;
+	private final int  TICK_SIZE = 3;
 	double len;
 	double dx, dy;
 
@@ -31,11 +32,11 @@ public class Ruler {
 		if(x1-x2 == 0)
 		{
 			for (double i = y1; i < len + y1; i += TICK_DIST)
-				g2d.drawLine(x1 - 3, (int) i, x2 + 3, (int) i);
+				g2d.drawLine(x1 - TICK_SIZE, (int) i, x2 + TICK_SIZE, (int) i);
 		}else
 		{
 			for (double i = x1; i < len + x1; i += TICK_DIST)
-				g2d.drawLine((int) i, y1 - 3, (int) i, y2 + 3);	
+				g2d.drawLine((int) i, y1 - TICK_SIZE, (int) i, y2 + TICK_SIZE);	
 		}
 	}
 }
