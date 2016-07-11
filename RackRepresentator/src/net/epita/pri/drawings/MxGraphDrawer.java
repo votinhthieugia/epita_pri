@@ -32,7 +32,7 @@ public class MxGraphDrawer implements IDrawer {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(IDrawable drawable) {
 		graph.getModel().beginUpdate();
 		Object parent = graph.getDefaultParent();
 		mxRectangleShape shape = new mxRectangleShape();

@@ -52,7 +52,7 @@ public class MainView extends BaseView {
 	
 	@Override
 	public void display() {
-		drawer.draw();
+		drawer.draw(null);
 	}
 
 	@Override

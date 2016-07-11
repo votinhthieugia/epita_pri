@@ -6,5 +6,4 @@ public class ApplicationController {
 		IViewController viewController = ViewController.Instance();
 		viewController.start();
 	}
-
 }
