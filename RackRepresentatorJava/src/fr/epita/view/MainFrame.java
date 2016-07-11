@@ -1,15 +1,21 @@
 package fr.epita.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
 import fr.epita.main.Ruler;
-import java.awt.Color;
+import fr.epita.models.DataLoader;
+import fr.epita.models.Drawable;
+import fr.epita.view.drawer.Drawer;
 
 public class MainFrame extends JComponent {
+	Drawable drawableData;
+	
 	public MainFrame() {
 		setBackground(Color.WHITE);
+		drawableData = DataLoader.load();
 	}
 
 	/**
@@ -33,5 +39,7 @@ public class MainFrame extends JComponent {
 		
 		new Ruler(50+distancia, 300,300+distancia, 300).draw(g);		
 		new Ruler(50+distancia, 50, 50+distancia, 300).draw(g);
+		
+		Drawer.Instance().draw(drawableData);
 	}
 }
