@@ -1,11 +1,15 @@
-package fr.epita.main;
+package fr.epita.view;
 
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class MainWindow extends JComponent {
-	public MainWindow() {
+import fr.epita.main.Ruler;
+import java.awt.Color;
+
+public class MainFrame extends JComponent {
+	public MainFrame() {
+		setBackground(Color.WHITE);
 	}
 
 	/**
@@ -16,6 +20,11 @@ public class MainWindow extends JComponent {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		g.setColor(getBackground());
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.setColor(Color.black);
 		
 		int distancia = 300;
 		
