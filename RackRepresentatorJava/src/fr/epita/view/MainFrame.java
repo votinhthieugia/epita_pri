@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
+import fr.epita.main.Console;
 import fr.epita.main.Ruler;
 import fr.epita.models.DataLoader;
 import fr.epita.models.Drawable;
@@ -63,7 +64,7 @@ public class MainFrame extends JComponent {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(e.getX() + " " + e.getY());
+				Console.Instance().info(e.getX() + " " + e.getY());
 			}
 		});
 	}
