@@ -5,15 +5,23 @@ public class ServerScope {
 	public static final int Orix = 1;
 	public static final int Electro = 2;
 	
-	private int scope;
+	private int scopeValue;
 	
 	public ServerScope(int scope) {
-		this.scope = scope;
+		this.scopeValue = scope;
 	}
 	
+	public int getScopeValue() {
+		return scopeValue;
+	}
+
+	public void setScopeValue(int scopeValue) {
+		this.scopeValue = scopeValue;
+	}
+
 	@Override
 	public String toString() {
-		return getScopeString(scope);
+		return getScopeString(scopeValue);
 	}
 	
 	public static String getScopeString(int scope) {

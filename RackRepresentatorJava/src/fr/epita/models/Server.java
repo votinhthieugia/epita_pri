@@ -4,7 +4,7 @@ public class Server extends Drawable {
 	private ServerState state;
 	private ServerProp prop;
 	private ServerScope scope;
-	private int roomIndex;
+	private int rackIndex;
 	private int index;
 	
 	public Server(String name, String description, int index, int state, int prop, int scope) {
@@ -18,7 +18,7 @@ public class Server extends Drawable {
 	public Server(String name, String description, int index, int roomIndex, int state, int prop, int scope) {
 		super(name, description);
 		this.index = index;
-		this.roomIndex = roomIndex;
+		this.rackIndex = roomIndex;
 		this.state = new ServerState(state);
 		this.prop = new ServerProp(prop);
 	}
@@ -63,12 +63,12 @@ public class Server extends Drawable {
 		this.prop = prop;
 	}
 
-	public int getRoomIndex() {
-		return roomIndex;
+	public int getRackIndex() {
+		return rackIndex;
 	}
 
-	public void setRoomIndex(int roomIndex) {
-		this.roomIndex = roomIndex;
+	public void setRackIndex(int rackIndex) {
+		this.rackIndex = rackIndex;
 	}
 
 	public ServerScope getScope() {

@@ -5,35 +5,35 @@ import java.util.List;
 
 public class DataCenter extends Drawable {
 	private int index;
-	private List<Room> rooms;
+	private List<Rack> racks;
 	
 	public DataCenter(String name, String description, int index) {
 		super(name, description);
 		this.index = index;
-		rooms = new ArrayList<Room>();
+		racks = new ArrayList<Rack>();
 	}
 	
-	public void addRoom(Room room) {
-		rooms.add(room);
+	public void addRack(Rack rack) {
+		racks.add(rack);
 	}
 	
-	public void removeRoom(Room room) {
-		rooms.remove(room);
+	public void removeRack(Rack rack) {
+		racks.remove(rack);
 	}
 	
-	public Room find(int roomIndex) {
-		for (int i = 0; i < rooms.size(); i++) {
-			Room room = rooms.get(i);
-			if (room.getIndex() == roomIndex) {
-				return room;
+	public Rack find(int rackIndex) {
+		for (int i = 0; i < racks.size(); i++) {
+			Rack rack = racks.get(i);
+			if (rack.getIndex() == rackIndex) {
+				return rack;
 			}
 		}
 		
 		return null;
 	}
 	
-	public Room findByIndex(int roomIndex) {
-		return roomIndex < rooms.size() ? rooms.get(roomIndex) : null;
+	public Rack findByIndex(int rackIndex) {
+		return rackIndex < racks.size() ? racks.get(rackIndex) : null;
 	}
 
 	public int getIndex() {
@@ -44,11 +44,11 @@ public class DataCenter extends Drawable {
 		this.index = index;
 	}
 
-	public List<Room> getRooms() {
-		return rooms;
+	public List<Rack> getRacks() {
+		return racks;
 	}
 
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
+	public void setRacks(List<Rack> racks) {
+		this.racks = racks;
 	}
 }

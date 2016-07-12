@@ -6,15 +6,23 @@ public class ServerProp {
 	public static final int NonWindowsRelatedEquipment = 1;
 	public static final int WindowsRelatedEquipment = 2;
 	
-	private int prop;
+	private int propValue;
 	
 	public ServerProp(int prop) {
-		this.prop = prop;
+		this.propValue = prop;
 	}
 	
+	public int getPropValue() {
+		return propValue;
+	}
+
+	public void setPropValue(int propValue) {
+		this.propValue = propValue;
+	}
+
 	@Override
 	public String toString() {
-		return getServerPropString(prop);
+		return getServerPropString(propValue);
 	}
 	
 	public static String getServerPropString(int prop) {

@@ -6,15 +6,23 @@ public class ServerState {
 	public static final int PlanToRemove = 2;
 	public static final int InUse = 3;
 	
-	private int state;
+	private int stateValue;
 	
 	public ServerState(int state) {
-		this.state = state;
+		this.stateValue = state;
 	}
 	
+	public int getStateValue() {
+		return stateValue;
+	}
+
+	public void setStateValue(int state) {
+		this.stateValue = state;
+	}
+
 	@Override
 	public String toString() {
-		return getStateString(state);
+		return getStateString(stateValue);
 	}
 	
 	public static String getStateString(int state) {

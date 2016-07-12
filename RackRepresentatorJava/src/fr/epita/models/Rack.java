@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Rack extends Drawable {
 	private int index;
-	private int roomIndex;
+	private int dataCenterIndex;
 	private List<Server> servers;
 	
-	public Rack(String name, String description, int roomIndex, int index) {
+	public Rack(String name, String description, int dataCenterIndex, int index) {
 		super(name, description);
 		this.index = index;
-		this.roomIndex = roomIndex;
+		this.dataCenterIndex = dataCenterIndex;
 		this.servers = new ArrayList<Server>();
 	}
 	
@@ -62,12 +62,12 @@ public class Rack extends Drawable {
 		this.description = description;
 	}
 
-	public int getRoomIndex() {
-		return roomIndex;
+	public int getDataCenterIndex() {
+		return dataCenterIndex;
 	}
 
-	public void setRoomIndex(int roomIndex) {
-		this.roomIndex = roomIndex;
+	public void setDataCenterIndex(int dataCenterIndex) {
+		this.dataCenterIndex = dataCenterIndex;
 	}
 
 	public int getIndex() {

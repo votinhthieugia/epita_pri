@@ -1,18 +1,19 @@
 package fr.epita.view.drawer;
 
+import java.awt.Graphics;
 import java.util.List;
 
 import fr.epita.models.DataCenter;
 import fr.epita.models.Drawable;
-import fr.epita.models.Room;
+import fr.epita.models.Rack;
 
 public class DataCenterDrawer implements IDrawer {
 
 	@Override
-	public void draw(Drawable drawable) {
+	public void draw(Graphics g, Drawable drawable) {
 		DataCenter dc = (DataCenter)drawable;
-		List<Room> rooms = dc.getRooms();
-		IDrawer roomDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.ROOM);
-		for (Room room : rooms) roomDrawer.draw(room); 
+		List<Rack> racks = dc.getRacks();
+		IDrawer rackDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.RACK);
+		for (Rack rack : racks) rackDrawer.draw(g, rack); 
 	}
 }

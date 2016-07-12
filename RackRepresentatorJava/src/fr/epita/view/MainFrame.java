@@ -2,6 +2,8 @@ package fr.epita.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
@@ -40,6 +42,29 @@ public class MainFrame extends JComponent {
 		new Ruler(50+distancia, 300,300+distancia, 300).draw(g);		
 		new Ruler(50+distancia, 50, 50+distancia, 300).draw(g);
 		
-		Drawer.Instance().draw(drawableData);
+		Drawer.Instance().draw(g, drawableData);
+		
+		addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e.getX() + " " + e.getY());
+			}
+		});
 	}
 }
