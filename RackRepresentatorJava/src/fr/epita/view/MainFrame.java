@@ -7,17 +7,20 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
+import fr.epita.data.ExcelLoader;
+import fr.epita.data.IDataLoader;
 import fr.epita.main.Ruler;
-import fr.epita.models.DataLoader;
 import fr.epita.models.Drawable;
 import fr.epita.view.drawer.Drawer;
 
 public class MainFrame extends JComponent {
 	Drawable drawableData;
+	IDataLoader dataLoader;
 	
 	public MainFrame() {
 		setBackground(Color.WHITE);
-		drawableData = DataLoader.load();
+		IDataLoader dataLoader = new ExcelLoader();
+		drawableData = dataLoader.loadAll();
 	}
 
 	/**

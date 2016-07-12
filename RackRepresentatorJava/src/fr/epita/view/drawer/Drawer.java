@@ -11,7 +11,6 @@ public class Drawer {
 	public enum DrawableType {
 		SERVER,
 		RACK,
-		ROOM,
 		DATA_CENTER
 	};
 	
