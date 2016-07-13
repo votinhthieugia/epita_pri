@@ -2,6 +2,7 @@ package fr.epita.view;
 
 import javax.swing.JFrame;
 
+import fr.epita.main.Console;
 import fr.epita.view.MainFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,11 +13,17 @@ public class Window extends JFrame {
 		super(name);
         getContentPane().setLayout(new BorderLayout(0, 0));
 		
+        BottomFrame bottomFrame = new BottomFrame();
+        MainFrame mainFrame = new MainFrame();
         SideFrame sideFrame = new SideFrame();
         sideFrame.setBackground(Color.DARK_GRAY);
+        
         getContentPane().add(sideFrame, BorderLayout.WEST);
-        getContentPane().add(new BottomFrame(), BorderLayout.SOUTH);
-        getContentPane().add(new MainFrame(), BorderLayout.CENTER);
+        getContentPane().add(bottomFrame, BorderLayout.SOUTH);
+        getContentPane().add(mainFrame, BorderLayout.CENTER);
+        
+        Console.Instance().setConsoleComponent(bottomFrame.getTxtAreaConsole());
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
         this.setVisible(true);

@@ -38,6 +38,17 @@ public class Rack extends Drawable {
 		return index < servers.size() ? servers.get(index) : null;
 	}
 	
+	public Server findByLowHigh(int low, int high) {
+		for (int i = 0; i < servers.size(); i++) {
+			Server server = servers.get(i);
+			if (server.getLow() == low && server.getHigh() == high) {
+				return server;
+			}
+		}
+		
+		return null;
+	}
+	
 	public List<Server> getServers() {
 		return servers;
 	}

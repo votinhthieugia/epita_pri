@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 
 import fr.epita.data.ExcelLoader;
 import fr.epita.data.IDataLoader;
+import fr.epita.main.Console;
 import fr.epita.main.Ruler;
 import fr.epita.models.Drawable;
 import fr.epita.view.drawer.Drawer;
@@ -19,7 +20,7 @@ public class MainFrame extends JComponent {
 	
 	public MainFrame() {
 		setBackground(Color.WHITE);
-		IDataLoader dataLoader = new ExcelLoader();
+		dataLoader = new ExcelLoader();
 		drawableData = dataLoader.loadAll();
 	}
 
@@ -66,7 +67,7 @@ public class MainFrame extends JComponent {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(e.getX() + " " + e.getY());
+				Console.Instance().info(e.getX() + " " + e.getY());
 			}
 		});
 	}
