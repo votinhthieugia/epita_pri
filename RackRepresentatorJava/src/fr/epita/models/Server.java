@@ -26,6 +26,9 @@ public class Server extends Drawable implements Iterator<Server> {
 		super(name, description);
 		this.index = index;
 		this.iterator = this;
+		this.prop = new ServerProp();
+		this.scope = new ServerScope();
+		this.state = new ServerState();
 	}
 	
 	public Server(String name, String description, int index, int state, int prop, int scope) {

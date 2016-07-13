@@ -1,12 +1,17 @@
 package fr.epita.models;
 
 public class ServerState {
+	public static final int Other = -1;
 	public static final int Free = 0;
 	public static final int PowerOffToRemove = 1;
 	public static final int PlanToRemove = 2;
 	public static final int InUse = 3;
 	
 	private int stateValue;
+	
+	public ServerState() {
+		stateValue = Other;
+	}
 	
 	public ServerState(int state) {
 		this.stateValue = state;

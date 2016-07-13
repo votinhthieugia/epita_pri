@@ -21,7 +21,7 @@ public class ServerDrawer implements IDrawer {
 	}
 	
 	private Color getServerColor(Server server) {
-		Color color = null;
+		Color color = Color.BLACK;
 		int prop = server.getProp().getPropValue();
 		switch (prop) {
 		case ServerProp.NonWindowsRelatedEquipment: break;

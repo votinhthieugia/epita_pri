@@ -8,6 +8,10 @@ public class ServerProp {
 	
 	private int propValue;
 	
+	public ServerProp() {
+		propValue = Other;
+	}
+	
 	public ServerProp(int prop) {
 		this.propValue = prop;
 	}

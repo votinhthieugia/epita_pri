@@ -3,6 +3,7 @@ package fr.epita.view.drawer;
 import java.awt.Graphics;
 
 import fr.epita.models.DataCenter;
+import fr.epita.models.DataSystem;
 import fr.epita.models.Drawable;
 import fr.epita.models.Rack;
 import fr.epita.models.Server;
@@ -18,6 +19,7 @@ public class Drawer {
 	private ServerDrawer serverDrawer;
 	private RackDrawer rackDrawer;
 	private DataCenterDrawer dcDrawer;
+	private SystemDrawer systemDrawer;
 	
 	private static Drawer instance;
 	
@@ -32,6 +34,7 @@ public class Drawer {
 		serverDrawer = new ServerDrawer();
 		rackDrawer = new RackDrawer();
 		dcDrawer = new DataCenterDrawer();
+		systemDrawer = new SystemDrawer();
 	}
 	
 	public IDrawer draw(Graphics g, Drawable drawable) {
@@ -44,6 +47,7 @@ public class Drawer {
 		if (drawable instanceof DataCenter) return dcDrawer;
 		else if (drawable instanceof Rack) return rackDrawer;
 		else if (drawable instanceof Server) return serverDrawer;
+		else if (drawable instanceof DataSystem) return systemDrawer;
 		return null;
 	}
 	
@@ -52,6 +56,7 @@ public class Drawer {
 		case SERVER: return serverDrawer;
 		case RACK: return rackDrawer;
 		case DATA_CENTER: return dcDrawer;
+		case SYSTEM: return systemDrawer;
 		default: return null;
 		}
 	}
