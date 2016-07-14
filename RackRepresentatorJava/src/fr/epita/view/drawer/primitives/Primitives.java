@@ -8,6 +8,8 @@ public class Primitives {
 	public static void drawRectangle(Graphics g, int x, int y, int width, int height) {
 		Graphics2D g2d = (Graphics2D)g.create();
 		g2d.drawRect(x, y, width, height);
+		new Ruler(x, y, x, height+y).draw(g2d);
+		new Ruler(x, y+height, x+width, y+height).draw(g2d);
 	}
 	
 	public static void fillRectangle(Graphics g, int x, int y, int width, int height, Color color) {

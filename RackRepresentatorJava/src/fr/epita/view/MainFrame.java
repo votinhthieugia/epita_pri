@@ -6,18 +6,33 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import fr.epita.main.Console;
-import fr.epita.main.Ruler;
 import fr.epita.models.DataLoader;
 import fr.epita.models.Drawable;
 import fr.epita.view.drawer.Drawer;
+import fr.epita.view.drawer.primitives.Ruler;
+
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class MainFrame extends JComponent {
 	Drawable drawableData;
 	
 	public MainFrame() {
+//		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		setBackground(Color.WHITE);
+		
+//		JComponent scrollPane = new JPanel();
+//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setBounds(0, 0, getWidth(), getHeight());
+//		add(scrollPane);
+		
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setBounds(0, 0, getWidth(), getHeight());
+//		add(scrollPane);
 		drawableData = DataLoader.load();
 	}
 
@@ -33,15 +48,16 @@ public class MainFrame extends JComponent {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
+		System.out.println("w: " + getWidth() + "\nh: " + getHeight());
+		
 		g.setColor(Color.black);
 		
-		int distancia = 300;
-		
-		new Ruler(50, 300,300, 300).draw(g);		
-		new Ruler(50, 50, 50, 300).draw(g);
-		
-		new Ruler(50+distancia, 300,300+distancia, 300).draw(g);		
-		new Ruler(50+distancia, 50, 50+distancia, 300).draw(g);
+//		int distancia = 300;		
+//		new Ruler(50, 300,300, 300).draw(g);		
+//		new Ruler(50, 50, 50, 300).draw(g);
+//		
+//		new Ruler(50+distancia, 300,300+distancia, 300).draw(g);		
+//		new Ruler(50+distancia, 50, 50+distancia, 300).draw(g);
 		
 		Drawer.Instance().draw(g, drawableData);
 		
