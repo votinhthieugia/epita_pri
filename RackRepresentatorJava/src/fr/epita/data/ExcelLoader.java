@@ -36,6 +36,17 @@ public class ExcelLoader implements IDataLoader {
 	@Override
 	public Drawable loadAll() {
 		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx");
+		//return loadAllFromFile("C:\\Users\\Gustavo\\Downloads\\DatacentreRack.xlsx");
+		
+        
+//	       Rack rack = new Rack("r1", "desc", 0, 0);
+//	       rack.position(50, 200, 100, 400);
+//	      
+//	       Server server = new Server("s1", "desc", 0, 0, 0, 0);
+//	       server.position(0, 0, 4, 1);
+//	      
+//	       rack.addServer(server);
+//	       return rack;
 	}
 
 	@Override
