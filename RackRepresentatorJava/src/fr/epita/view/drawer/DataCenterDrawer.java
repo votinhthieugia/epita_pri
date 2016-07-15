@@ -25,13 +25,11 @@ public class DataCenterDrawer implements IDrawer {
 			IDrawer rackDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.RACK);
 			int i = 0;
 			for (Rack rack : racks) {
-				
 				rack.setWidth(RackDrawer.RACK_COLUMNS*RackDrawer.SERVER_UNIT_PIXELS);
 				rack.setHeight(RackDrawer.RACK_ROWS*RackDrawer.SERVER_UNIT_PIXELS);				
-				rack.setX(RACK_PADDING_X+(i*rack.getWidth()));
+				rack.setX((RACK_PADDING_X+rack.getWidth())*i++ + RACK_PADDING_X);
 				rack.setY(RACK_PADDING_Y);
 				rackDrawer.draw(g, rack);
-				i++;
 			}
 		}
 	}

@@ -25,10 +25,12 @@ public class MainFrame extends BaseFrame {
 		super(manager);
 		setSize(2000, 2000);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		for(int i = 0 ; i< 100;i++)
-		add(new JLabel(" "));
 		
-		setBorder(BorderFactory.createLineBorder(Color.black, 1));
+		//////WORKAROUND FOR SCROLLPANEL's scrollbar.
+		for(int i = 0; i < 75;i++)
+			add(new JLabel(" "));
+		/////////
+		setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		
 		dataLoader = new ExcelLoader();
 		drawableData = dataLoader.loadAll();
@@ -46,10 +48,7 @@ public class MainFrame extends BaseFrame {
 		
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
-		System.out.println("w: " + getWidth() + "\nh: " + getHeight());
-		
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		
 		if (drawableData != null) {
 			Drawer.Instance().draw(g, drawableData);

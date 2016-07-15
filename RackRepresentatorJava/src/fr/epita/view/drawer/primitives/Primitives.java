@@ -5,6 +5,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Primitives {
+	
+	public static void drawRectangle(Graphics g, int x, int y, int width, int height, Color color) {
+		Graphics2D g2d = (Graphics2D)g.create();
+		g2d.setColor(color);
+		g2d.drawRect(x, y, width, height);
+	}
+	
 	public static void drawRectangle(Graphics g, int x, int y, int width, int height) {
 		Graphics2D g2d = (Graphics2D)g.create();
 		g2d.drawRect(x, y, width, height);
@@ -43,4 +50,12 @@ public class Primitives {
 		g2d.setColor(color);
 		g2d.drawString(text, x, y);
 	}
+	
+	public static void drawTextRotate(Graphics2D g2d, int x, int y, int angle, String text, Color color) 
+	{    
+	    g2d.translate((float)x,(float)y);
+	    g2d.rotate(Math.toRadians(angle));
+	    g2d.setColor(color);
+	    g2d.drawString(text,0,0);	    
+	} 
 }
