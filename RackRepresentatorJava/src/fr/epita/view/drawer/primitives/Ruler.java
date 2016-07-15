@@ -19,8 +19,6 @@ public class Ruler {
 		int dy = y2 - y1;
 		int len = (int) Math.sqrt(dx * dx + dy * dy);
 		
-//		g2d.drawLine(x1, y1, x2, y2);
-
 		if(x1-x2 == 0)
 		{
 			for (int i = y1, pos = (int) ((len + y1)/TICK_DIST)+1; i <= len + y1; i += TICK_DIST, pos--){

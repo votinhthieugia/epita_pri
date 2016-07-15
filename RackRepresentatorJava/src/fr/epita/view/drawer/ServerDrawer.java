@@ -11,7 +11,7 @@ import fr.epita.view.drawer.primitives.Primitives;
 
 public class ServerDrawer implements IDrawer {
 
-
+	static final int TEXT_PADDING_Y = 13;
 	
 	@Override
 	public void draw(Graphics g, Drawable drawable) {
@@ -20,6 +20,8 @@ public class ServerDrawer implements IDrawer {
 //		Primitives.drawRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight());
 //		Primitives.fillRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), 10, 10, Color.red);
 //		Primitives.drawText(g, server.getX(), server.getY() + 10, server.getName(), Color.WHITE);
+		Primitives.fillRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), getServerColor(server));
+		Primitives.drawText(g, server.getX(), server.getY() + TEXT_PADDING_Y, server.getName() , Color.YELLOW);
 	}
 	
 	private Color getServerColor(Server server) {

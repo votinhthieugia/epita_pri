@@ -10,7 +10,7 @@ import fr.epita.view.drawer.primitives.Primitives;
 
 public class RackDrawer implements IDrawer {
 
-	public static final int SERVER_UNIT_PIXELS = 15;
+	public static final int SERVER_UNIT_PIXELS = 25;
 	public static final int RACK_ROWS = 42;
 	public static final int RACK_COLUMNS = 8;
 	
@@ -18,16 +18,22 @@ public class RackDrawer implements IDrawer {
 	public void draw(Graphics g, Drawable drawable) {
 		
 		Rack rack = (Rack)drawable;
-		
+		int rackX = 100;
 		if (rack.isShouldDraw()) {
-			Primitives.drawRectangleWithRuler(g, 0+100, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
-		}
-		
+			Primitives.drawRectangleWithRuler(g, 0+rackX, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
+		}		
 		
 		if (rack.isShouldDrawChildren()) {			
 			List<Server> servers = rack.getServers();
 			IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
-			for (Server server : servers) serverDrawer.draw(g, server);
+			for (Server server : servers){ 
+				server.setY(RACK_ROWS*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU()));
+				server.setX(rackX);
+				server.setWidth(RACK_COLUMNS*SERVER_UNIT_PIXELS);
+				server.setHeight(SERVER_UNIT_PIXELS*server.getNumU());
+//				server.setHeight(SERVER_UNIT_PIXELS);
+				serverDrawer.draw(g, server);
+			}
 		}
 	}
 }

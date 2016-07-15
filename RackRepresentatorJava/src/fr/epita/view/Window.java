@@ -1,26 +1,25 @@
 package fr.epita.view;
 
-import javax.swing.JFrame;
-
-import fr.epita.main.Console;
-import fr.epita.view.MainFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+
+import fr.epita.main.Console;
 
 public class Window extends JFrame {
 	BaseFrame[] frames;
 
 	public Window(String name){
 		super(name);
-        getContentPane().setLayout(new BorderLayout(0, 0));
 		
         
         frames = new BaseFrame[FrameId.TOTAL];
         
         BottomFrame bottomFrame = new BottomFrame(this);
-        frames[FrameId.BOTTOM] = bottomFrame; 
+        frames[FrameId.BOTTOM] = bottomFrame;
+        getContentPane().setLayout(new BorderLayout(0, 0));
         SideFrame sideFrame = new SideFrame(this);
         sideFrame.setBackground(Color.DARK_GRAY);
         frames[FrameId.SIDE] = sideFrame;
@@ -30,14 +29,15 @@ public class Window extends JFrame {
         
         Console.Instance().setConsoleComponent(bottomFrame.getTxtAreaConsole());
         
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         MainFrame mainFrame = new MainFrame(this);
-        frames[FrameId.MAIN] = mainFrame;
-//        scrollPane.add(mainFrame);
+        mainFrame.setBounds(111, 116, 2000, 1000);
+        
 
-//        getContentPane().add(scrollPane, BorderLayout.CENTER);
-        getContentPane().add(mainFrame, BorderLayout.CENTER);
+        JScrollPane scroll = new JScrollPane(mainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+    			JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        
+        getContentPane().add(scroll, BorderLayout.CENTER);
+        
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
