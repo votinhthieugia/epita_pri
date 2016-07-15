@@ -20,7 +20,7 @@ public class RackDrawer implements IDrawer {
 		Rack rack = (Rack)drawable;
 		
 		if (rack.isShouldDraw()) {
-			Primitives.drawRectangle(g, 0+100, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
+			Primitives.drawRectangleWithRuler(g, 0+100, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
 		}
 		
 		

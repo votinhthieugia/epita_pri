@@ -6,30 +6,19 @@ import java.awt.Graphics2D;
 import fr.epita.view.drawer.RackDrawer;
 
 public class Ruler {
+	
+	private static final int TICK_DIST = RackDrawer.SERVER_UNIT_PIXELS;
+	private static final int  TICK_SIZE = 3;
+	private static final int  STRING_PADDING = 19;
 
-	int x1, x2, y1, y2;
-	private final int TICK_DIST = RackDrawer.SERVER_UNIT_PIXELS;
-	private final int  TICK_SIZE = 3;
-	private final int  STRING_PADDING = 19;
-	double len;
-	double dx, dy;
-
-	public Ruler(int x1, int y1, int x2, int y2) {
-
-		this.x1 = x1;
-		this.x2 = x2;
-		this.y1 = y1;
-		this.y2 = y2;
-
-		dx = x2 - x1;
-		dy = y2 - y1;
-		len = Math.sqrt(dx * dx + dy * dy);
-	}
-
-	public void draw(Graphics g) {
+	public static void draw(Graphics g, int x1, int y1, int x2, int y2) {
 
 		Graphics2D g2d = (Graphics2D) g.create();
 
+		int dx = x2 - x1;
+		int dy = y2 - y1;
+		int len = (int) Math.sqrt(dx * dx + dy * dy);
+		
 //		g2d.drawLine(x1, y1, x2, y2);
 
 		if(x1-x2 == 0)
