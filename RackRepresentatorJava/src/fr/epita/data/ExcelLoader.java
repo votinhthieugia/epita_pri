@@ -75,6 +75,7 @@ public class ExcelLoader implements IDataLoader {
 			int numRows = sheet.getLastRowNum() - sheet.getFirstRowNum();
 			for (int i = 1; i < numRows + 1; i++) {
 				Row row = sheet.getRow(i);
+				if (row == null || row.getCell(0).getCellType() == Cell.CELL_TYPE_BLANK) break;
 				String dcName = row.getCell(ColumnName.DataCenterName.ordinal()).getStringCellValue();
 				DataCenter dc = system.findByName(dcName);
 				
@@ -119,7 +120,7 @@ public class ExcelLoader implements IDataLoader {
 				}
 			}
 		} catch (Exception exception) {
-			System.out.println(exception.toString());
+			exception.printStackTrace();
 		}
 		
 		return system;
