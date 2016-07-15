@@ -19,7 +19,7 @@ public class ServerDrawer implements IDrawer {
 //		Primitives.fillRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), getServerColor(server));
 //		Primitives.drawRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight());
 //		Primitives.fillRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), 10, 10, Color.red);
-		Primitives.drawText(g, server.getX(), server.getY() + 10, server.getName(), Color.WHITE);
+//		Primitives.drawText(g, server.getX(), server.getY() + 10, server.getName(), Color.WHITE);
 	}
 	
 	private Color getServerColor(Server server) {
@@ -43,4 +43,5 @@ public class ServerDrawer implements IDrawer {
 		
 		return color;
 	}
+
 }

@@ -1,6 +1,5 @@
 package fr.epita.view.drawer;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -17,13 +16,18 @@ public class RackDrawer implements IDrawer {
 	
 	@Override
 	public void draw(Graphics g, Drawable drawable) {
+		
 		Rack rack = (Rack)drawable;
 		
-//		Primitives.drawRectangle(g, x, y, width, height);
-		Primitives.drawRectangle(g, 0+100, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
-				
-		List<Server> servers = rack.getServers();
-		IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
-		for (Server server : servers) serverDrawer.draw(g, server);
+		if (rack.isShouldDraw()) {
+			Primitives.drawRectangle(g, 0+100, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
+		}
+		
+		
+		if (rack.isShouldDrawChildren()) {			
+			List<Server> servers = rack.getServers();
+			IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
+			for (Server server : servers) serverDrawer.draw(g, server);
+		}
 	}
 }

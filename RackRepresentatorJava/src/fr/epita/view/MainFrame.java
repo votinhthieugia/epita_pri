@@ -6,34 +6,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
+import fr.epita.data.ExcelLoader;
+import fr.epita.data.IDataLoader;
 import fr.epita.main.Console;
-import fr.epita.models.DataLoader;
 import fr.epita.models.Drawable;
 import fr.epita.view.drawer.Drawer;
-import fr.epita.view.drawer.primitives.Ruler;
-
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class MainFrame extends JComponent {
 	Drawable drawableData;
+	IDataLoader dataLoader;
 	
 	public MainFrame() {
 //		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		setBackground(Color.WHITE);
-		
-//		JComponent scrollPane = new JPanel();
-//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		scrollPane.setBounds(0, 0, getWidth(), getHeight());
-//		add(scrollPane);
-		
-//		JScrollPane scrollPane = new JScrollPane();
-//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		scrollPane.setBounds(0, 0, getWidth(), getHeight());
-//		add(scrollPane);
-		drawableData = DataLoader.load();
+		dataLoader = new ExcelLoader();
+		drawableData = dataLoader.loadAll();
 	}
 
 	/**

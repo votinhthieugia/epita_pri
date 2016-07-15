@@ -1,11 +1,16 @@
 package fr.epita.models;
 
 public class ServerScope {
+	public static final int Other = -1;
 	public static final int Lan = 0;
 	public static final int Orix = 1;
 	public static final int Electro = 2;
 	
 	private int scopeValue;
+	
+	public ServerScope() {
+		scopeValue = Other;
+	}
 	
 	public ServerScope(int scope) {
 		this.scopeValue = scope;

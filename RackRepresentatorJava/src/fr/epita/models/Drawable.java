@@ -7,10 +7,14 @@ public class Drawable {
 	protected int y;
 	protected int width;
 	protected int height;
+	protected boolean shouldDraw;
+	protected boolean shouldDrawChildren;
 	
 	public Drawable(String name, String description) {
 		this.name = name;
 		this.description = description;
+		shouldDraw = true;
+		shouldDrawChildren = true;
 	}
 	
 	public void position(int x, int y, int width, int height) {
@@ -50,5 +54,37 @@ public class Drawable {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isShouldDraw() {
+		return shouldDraw;
+	}
+
+	public void setShouldDraw(boolean shouldDraw) {
+		this.shouldDraw = shouldDraw;
+	}
+
+	public boolean isShouldDrawChildren() {
+		return shouldDrawChildren;
+	}
+
+	public void setShouldDrawChildren(boolean shouldDrawChildren) {
+		this.shouldDrawChildren = shouldDrawChildren;
 	}
 }

@@ -35,6 +35,17 @@ public class DataCenter extends Drawable {
 	public Rack findByIndex(int rackIndex) {
 		return rackIndex < racks.size() ? racks.get(rackIndex) : null;
 	}
+	
+	public Rack findByName(String name) {
+		for (int i = 0; i < racks.size(); i++) {
+			Rack rack = racks.get(i);
+			if (rack.getName().equals(name)) {
+				return rack;
+			}
+		}
+		
+		return null;
+	}
 
 	public int getIndex() {
 		return index;
