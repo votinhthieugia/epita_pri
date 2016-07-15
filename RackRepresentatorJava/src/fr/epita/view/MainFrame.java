@@ -20,7 +20,7 @@ public class MainFrame extends BaseFrame {
 //		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		setBackground(Color.WHITE);
 		dataLoader = new ExcelLoader();
-//		drawableData = dataLoader.loadAll();
+		drawableData = dataLoader.loadAll();
 	}
 	
 	public void loadFromFile(String filePath) {
