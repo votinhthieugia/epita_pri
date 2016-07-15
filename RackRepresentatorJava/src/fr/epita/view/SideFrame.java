@@ -1,15 +1,22 @@
 package fr.epita.view;
 
+import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JComponent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import java.awt.Component;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
-public class SideFrame extends JComponent {
-	public SideFrame() {
+public class SideFrame extends BaseFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
+	JButton btnLoad;
+	JButton btnSettings;
+	
+	public SideFrame(Window manager) {
+		super(manager);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel label = new JLabel("Admin");
@@ -17,7 +24,7 @@ public class SideFrame extends JComponent {
 		
 		add(new JLabel(" "));
 		
-		JButton btnSettings = new JButton("Settings");
+		btnSettings = new JButton("Settings");
 		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnSettings);
 		
@@ -29,8 +36,10 @@ public class SideFrame extends JComponent {
 
 		add(new JLabel(" "));
 		
-		JButton btnLoad = new JButton("Load");
+		btnLoad = new JButton("Load");
 		btnLoad.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnLoad.addActionListener(this);
+		
 		add(btnLoad);
 		
 		add(new JLabel(" "));
@@ -38,10 +47,21 @@ public class SideFrame extends JComponent {
 		btnExport.setAlignmentX(Component.CENTER_ALIGNMENT);
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	void onLoadBtnClicked() {
+		final JFileChooser fc = new JFileChooser();
+		int response = fc.showOpenDialog(this);
+		if (response == JFileChooser.APPROVE_OPTION) {
+			MainFrame mainFrame = (MainFrame)manager.getFrame(FrameId.MAIN);
+			mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath());
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnLoad) {
+            onLoadBtnClicked();
+		}
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {

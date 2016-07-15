@@ -8,14 +8,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 public class Window extends JFrame {
+	private static final long serialVersionUID = 1L;
+
+	private BaseFrame[] frames;
 
 	public Window(String name){
 		super(name);
         getContentPane().setLayout(new BorderLayout(0, 0));
 		
-        BottomFrame bottomFrame = new BottomFrame();
-        MainFrame mainFrame = new MainFrame();
-        SideFrame sideFrame = new SideFrame();
+        frames = new BaseFrame[FrameId.TOTAL];
+        
+        BottomFrame bottomFrame = new BottomFrame(this);
+        frames[FrameId.BOTTOM] = bottomFrame; 
+        MainFrame mainFrame = new MainFrame(this);
+        frames[FrameId.MAIN] = mainFrame;
+        SideFrame sideFrame = new SideFrame(this);
+        frames[FrameId.SIDE] = sideFrame;
         sideFrame.setBackground(Color.DARK_GRAY);
         
         getContentPane().add(sideFrame, BorderLayout.WEST);
@@ -28,11 +36,15 @@ public class Window extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
         this.setVisible(true);
 	}
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	
+	public BaseFrame getFrame(int frameId) {
+		if (frameId >= 0 && frameId < FrameId.TOTAL) {
+			return frames[frameId];
+		}
+		
+		return null;
+	}
+	
 	/**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
