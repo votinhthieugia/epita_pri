@@ -51,7 +51,9 @@ public class MainFrame extends BaseFrame {
 //		new Ruler(50+distancia, 300,300+distancia, 300).draw(g);		
 //		new Ruler(50+distancia, 50, 50+distancia, 300).draw(g);
 		
-		Drawer.Instance().draw(g, drawableData);
+		if (drawableData != null) {
+			Drawer.Instance().draw(g, drawableData);
+		}
 		
 		addMouseListener(new MouseListener() {
 			@Override
