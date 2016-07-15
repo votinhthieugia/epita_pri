@@ -31,7 +31,7 @@ public class Window extends JFrame {
         
         MainFrame mainFrame = new MainFrame(this);
         mainFrame.setBounds(111, 116, 2000, 1000);
-        
+        frames[FrameId.MAIN] = mainFrame;
 
         JScrollPane scroll = new JScrollPane(mainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
     			JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

@@ -16,10 +16,7 @@ public class ServerDrawer implements IDrawer {
 	@Override
 	public void draw(Graphics g, Drawable drawable) {
 		Server server = (Server)drawable;
-//		Primitives.fillRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), getServerColor(server));
-//		Primitives.drawRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight());
-//		Primitives.fillRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), 10, 10, Color.red);
-//		Primitives.drawText(g, server.getX(), server.getY() + 10, server.getName(), Color.WHITE);
+
 		Primitives.fillRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), getServerColor(server));
 		Primitives.drawText(g, server.getX(), server.getY() + TEXT_PADDING_Y, server.getName() , Color.YELLOW);
 	}

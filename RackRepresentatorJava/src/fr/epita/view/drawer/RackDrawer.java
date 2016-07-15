@@ -18,20 +18,19 @@ public class RackDrawer implements IDrawer {
 	public void draw(Graphics g, Drawable drawable) {
 		
 		Rack rack = (Rack)drawable;
-		int rackX = 100;
+
 		if (rack.isShouldDraw()) {
-			Primitives.drawRectangleWithRuler(g, 0+rackX, 0, RACK_COLUMNS*SERVER_UNIT_PIXELS, RACK_ROWS*SERVER_UNIT_PIXELS);
+			Primitives.drawRectangleWithRuler(g, rack.getX(), rack.getY(), rack.getWidth(), rack.getHeight());
 		}		
 		
 		if (rack.isShouldDrawChildren()) {			
 			List<Server> servers = rack.getServers();
 			IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
 			for (Server server : servers){ 
-				server.setY(RACK_ROWS*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU()));
-				server.setX(rackX);
+				server.setY(rack.getY() + (RACK_ROWS-server.getLow())*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU()));
+				server.setX(rack.getX());
 				server.setWidth(RACK_COLUMNS*SERVER_UNIT_PIXELS);
 				server.setHeight(SERVER_UNIT_PIXELS*server.getNumU());
-//				server.setHeight(SERVER_UNIT_PIXELS);
 				serverDrawer.draw(g, server);
 			}
 		}

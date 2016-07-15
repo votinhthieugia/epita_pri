@@ -21,7 +21,7 @@ public class Ruler {
 		
 		if(x1-x2 == 0)
 		{
-			for (int i = y1, pos = (int) ((len + y1)/TICK_DIST)+1; i <= len + y1; i += TICK_DIST, pos--){
+			for (int i = y1 + TICK_DIST, pos = (int) (len /TICK_DIST); i <= len + y1; i += TICK_DIST, pos--){
 				g2d.drawLine(x1 - TICK_SIZE, i, x2 + TICK_SIZE, i);
 				g2d.drawString("" + pos, x1 - STRING_PADDING, i);
 			}
