@@ -2,9 +2,9 @@ package fr.epita.view.extras;
 
 import java.awt.Graphics;
 
-import fr.epita.models.Drawable;
-import fr.epita.models.Rack;
-import fr.epita.models.Server;
+import fr.epita.pri.rackrepresentator.models.Drawable;
+import fr.epita.pri.rackrepresentator.models.Rack;
+import fr.epita.pri.rackrepresentator.models.Server;
 
 public class DisplayMore {
 	private IDisplayMore serverDisplayMore;

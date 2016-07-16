@@ -3,8 +3,8 @@ package fr.epita.view.extras;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import fr.epita.models.Rack;
-import fr.epita.view.drawer.primitives.Primitives;
+import fr.epita.pri.rackrepresentator.models.Rack;
+import fr.epita.pri.rackrepresentator.view.drawer.primitives.Primitives;
 
 public class RackDisplayMore implements IDisplayMore {
 	private static final int LINE_OFFSET = 20;
