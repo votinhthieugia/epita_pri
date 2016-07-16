@@ -23,8 +23,9 @@ public class Primitives {
 		g2d.fillRect(x, y, width, height);
 	}
 	
-	public static void drawRoundRectangle(Graphics g, int x, int y, int width, int height, int arcWidth, int arcHeight) {
+	public static void drawRoundRectangle(Graphics g, int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
 		Graphics2D g2d = (Graphics2D)g.create();
+		g2d.setColor(color);
 		g2d.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
 	}
 	

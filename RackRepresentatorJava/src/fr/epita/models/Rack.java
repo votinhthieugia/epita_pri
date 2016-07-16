@@ -16,10 +16,12 @@ public class Rack extends Drawable {
 	}
 	
 	public void addServer(Server server) {
+		server.setParent(this);
 		servers.add(server);
 	}
 	
 	public void removeServer(Server server) {
+		server.setParent(null);
 		servers.remove(server);
 	}
 	
@@ -87,5 +89,23 @@ public class Rack extends Drawable {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+	
+	public int getNumServers() {
+		int count = 0;
+		for (Server s : servers) count += s.count();
+		return count;
+	}
+
+	@Override
+	public Drawable findDrawableWithPosition(int x, int y) {
+		Drawable found = null;
+		for (Server s : servers) {
+			found = s.findDrawableWithPosition(x, y);
+			if (found != null) break;
+			found = null;
+		}
+		if (found == null && isInPosition(x, y)) found = this;
+		return found;
 	}
 }

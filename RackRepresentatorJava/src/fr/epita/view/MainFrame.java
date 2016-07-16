@@ -11,15 +11,16 @@ import javax.swing.JLabel;
 
 import fr.epita.data.ExcelLoader;
 import fr.epita.data.IDataLoader;
-import fr.epita.main.Console;
 import fr.epita.models.Drawable;
 import fr.epita.view.drawer.Drawer;
+import fr.epita.view.extras.DisplayMore;
 
-public class MainFrame extends BaseFrame {
+public class MainFrame extends BaseFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	Drawable drawableData;
 	IDataLoader dataLoader;
+	DisplayMore displayMore;
 	
 	public MainFrame(Window manager) {
 		super(manager);
@@ -32,6 +33,8 @@ public class MainFrame extends BaseFrame {
 		
 		dataLoader = new ExcelLoader();
 		drawableData = dataLoader.loadAll();
+		displayMore = new DisplayMore();
+		addMouseListener(this);
 	}
 
 
@@ -55,27 +58,32 @@ public class MainFrame extends BaseFrame {
 			Drawer.Instance().draw(g, drawableData);
 		}
 		
-		addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Console.Instance().info(e.getX() + " " + e.getY());
-			}
-		});
+		displayMore.draw(g);
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (drawableData != null) {
+			Drawable drawable = drawableData.findDrawableWithPosition(e.getX(), e.getY());
+			if (drawable != null) displayMore.show(drawable, drawable.getX() + drawable.getWidth(), e.getY());
+			else displayMore.hideAll();
+			repaint();
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package fr.epita.models;
 
 public class Drawable {
+	protected Drawable parent;
 	protected String name;
 	protected String description;
 	protected int x;
@@ -86,5 +87,23 @@ public class Drawable {
 
 	public void setShouldDrawChildren(boolean shouldDrawChildren) {
 		this.shouldDrawChildren = shouldDrawChildren;
+	}
+	
+	public Drawable getParent() {
+		return parent;
+	}
+
+	public void setParent(Drawable parent) {
+		this.parent = parent;
+	}
+	
+	public boolean isInPosition(int x, int y) {
+		return this.x <= x && x <= this.x + width &&
+				this.y <= y && y <= this.y + height;
+	}
+	
+	public Drawable findDrawableWithPosition(int x, int y) {
+		if (isInPosition(x, y)) return this;
+		return null;
 	}
 }

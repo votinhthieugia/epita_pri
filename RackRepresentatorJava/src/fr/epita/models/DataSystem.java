@@ -35,4 +35,16 @@ public class DataSystem extends Drawable {
 	public void setCenters(List<DataCenter> centers) {
 		this.centers = centers;
 	}
+	
+	@Override
+	public Drawable findDrawableWithPosition(int x, int y) {
+		Drawable found = null;
+		for (DataCenter dc : centers) {
+			found = dc.findDrawableWithPosition(x, y);
+			if (found != null) break;
+			found = null;
+		}
+		if (found == null && isInPosition(x, y)) found = this;
+		return found;
+	}
 }

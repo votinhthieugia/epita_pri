@@ -3,9 +3,9 @@ package fr.epita.models;
 public class ServerState {
 	public static final int Other = -1;
 	public static final int Free = 0;
-	public static final int PowerOffToRemove = 1;
-	public static final int PlanToRemove = 2;
-	public static final int InUse = 3;
+	public static final int InUse = 2;
+	public static final int PlanToRemove = 3;
+	public static final int PowerOffToRemove = 4;
 	
 	private int stateValue;
 	

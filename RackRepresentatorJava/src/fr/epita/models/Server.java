@@ -191,6 +191,7 @@ public class Server extends Drawable implements Iterator<Server> {
 
 	public void setCriticality(int criticality) {
 		this.criticality = criticality;
+		this.state.setStateValue(criticality);
 	}
 
 	public Server getNext() {
@@ -199,8 +200,24 @@ public class Server extends Drawable implements Iterator<Server> {
 
 	public void setNext(Server next) {
 		this.next = next;
+		if (next != null) next.setParent(parent);
 	}
-	
+
+	@Override
+	public Drawable findDrawableWithPosition(int x, int y) {
+		Drawable found = null;
+		resetIterator();
+		
+		while (hasNext()) {
+			found = next();
+			if (found.isInPosition(x, y)) break; 
+			found = null;
+		}
+		
+		resetIterator();
+		return found;
+	}
+
 	public int count() {
 		int c = 0;
 		Server s = this;

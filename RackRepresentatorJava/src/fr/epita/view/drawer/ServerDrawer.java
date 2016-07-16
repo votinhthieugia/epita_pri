@@ -17,12 +17,13 @@ public class ServerDrawer implements IDrawer {
 	public void draw(Graphics g, Drawable drawable) {
 		Server server = (Server)drawable;
 
-		Primitives.fillRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), getServerColor(server));
-		Primitives.drawText(g, server.getX(), server.getY() + TEXT_PADDING_Y, server.getName() , Color.YELLOW);
+		Primitives.drawRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), 20, 20, Color.gray);
+		Primitives.fillRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), 20, 20, getServerColor(server));
+		Primitives.drawText(g, server.getX(), server.getY() + TEXT_PADDING_Y, server.getName() , Color.BLACK);
 	}
 	
 	private Color getServerColor(Server server) {
-		Color color = null;
+		Color color = Color.green;
 		int prop = server.getProp().getPropValue();
 		switch (prop) {
 		case ServerProp.NonWindowsRelatedEquipment: break;
@@ -33,10 +34,10 @@ public class ServerDrawer implements IDrawer {
 		
 		int state = server.getState().getStateValue();
 		switch (state) {
-		case ServerState.Free: color = Color.BLUE; break;
-		case ServerState.InUse: color = Color.GREEN; break;
-		case ServerState.PowerOffToRemove: color = Color.RED; break;
+		case ServerState.Free: color = Color.WHITE; break;
+		case ServerState.InUse: color = Color.CYAN; break;
 		case ServerState.PlanToRemove: color = Color.ORANGE; break;
+		case ServerState.PowerOffToRemove: color = Color.RED; break;
 		default: break;
 		}
 		

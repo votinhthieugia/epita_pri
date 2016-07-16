@@ -26,6 +26,7 @@ public class SideFrame extends BaseFrame implements ActionListener {
 		
 		btnSettings = new JButton("Settings");
 		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnSettings.addActionListener(this);
 		add(btnSettings);
 		
 		add(new JLabel(" "));
@@ -39,7 +40,6 @@ public class SideFrame extends BaseFrame implements ActionListener {
 		btnLoad = new JButton("Load");
 		btnLoad.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnLoad.addActionListener(this);
-		
 		add(btnLoad);
 		
 		add(new JLabel(" "));
@@ -60,6 +60,7 @@ public class SideFrame extends BaseFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLoad) {
             onLoadBtnClicked();
+		} else if (e.getSource() == btnSettings) {
 		}
 	}
 	

@@ -9,12 +9,13 @@ import javax.swing.JScrollPane;
 import fr.epita.main.Console;
 
 public class Window extends JFrame {
-	BaseFrame[] frames;
+	private static final long serialVersionUID = 1L;
+	
+	private BaseFrame[] frames;
 
 	public Window(String name){
 		super(name);
 		
-        
         frames = new BaseFrame[FrameId.TOTAL];
         
         BottomFrame bottomFrame = new BottomFrame(this);
@@ -38,7 +39,6 @@ public class Window extends JFrame {
         
         getContentPane().add(scroll, BorderLayout.CENTER);
         
-        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
         this.setVisible(true);
@@ -50,9 +50,4 @@ public class Window extends JFrame {
 		}
 		return null;
 	}
-	
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 }

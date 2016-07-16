@@ -14,10 +14,12 @@ public class DataCenter extends Drawable {
 	}
 	
 	public void addRack(Rack rack) {
+		rack.setParent(this);
 		racks.add(rack);
 	}
 	
 	public void removeRack(Rack rack) {
+		rack.setParent(null);
 		racks.remove(rack);
 	}
 	
@@ -61,5 +63,17 @@ public class DataCenter extends Drawable {
 
 	public void setRacks(List<Rack> racks) {
 		this.racks = racks;
+	}
+	
+	@Override
+	public Drawable findDrawableWithPosition(int x, int y) {
+		Drawable found = null;
+		for (Rack r : racks) {
+			found = r.findDrawableWithPosition(x, y);
+			if (found != null) break;
+			found = null;
+		}
+		if (found == null && isInPosition(x, y)) found = this;
+		return found;
 	}
 }
