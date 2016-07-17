@@ -12,10 +12,11 @@ import fr.epita.pri.rackrepresentator.view.drawer.primitives.Primitives;
 public class RackDrawer implements IDrawer {
 
 	public static final int SERVER_UNIT_PIXELS = 25;
-	public static final int RACK_ROWS = 42;
-	public static final int RACK_COLUMNS = 8;
 	
-	private static final int BLADE_SERVER_WIDTH = SERVER_UNIT_PIXELS;
+	static final int RACK_ROWS = 42;
+	static final int RACK_COLUMNS = 8;	
+	static final int BLADE_SERVER_WIDTH = SERVER_UNIT_PIXELS;
+	
 	private static final int TEXT_PADDING_Y = 13;
 	
 	@Override
@@ -29,21 +30,23 @@ public class RackDrawer implements IDrawer {
 		}		
 		
 		if (rack.isShouldDrawChildren()) {			
-			List<Server> servers = rack.getServers();
+			List<Drawable> servers = rack.getChildren();
 			IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
-			for (Server server : servers){ 
+
+			for (int i = 0; i < servers.size(); i++) {
+				Server server = (Server) servers.get(i); 
 				
 				//is blade server?
 				if(server.count() > 1){
 					
-					int i = 0;
+					int j = 0;
 					while(server.hasNext()){
 						Server innerServer = server.next();
 						innerServer.setWidth(BLADE_SERVER_WIDTH);
 						innerServer.setHeight(SERVER_UNIT_PIXELS*server.getNumU());
 						
 						innerServer.setY(rack.getY() + (RACK_ROWS-server.getLow())*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU()));
-						innerServer.setX(rack.getX()+(i++*BLADE_SERVER_WIDTH));
+						innerServer.setX(rack.getX()+(j++*BLADE_SERVER_WIDTH));
 						
 						serverDrawer.draw(g, innerServer);
 					}
@@ -58,8 +61,6 @@ public class RackDrawer implements IDrawer {
 					
 					serverDrawer.draw(g, server);
 				}
-
-				
 			}
 		}
 	}

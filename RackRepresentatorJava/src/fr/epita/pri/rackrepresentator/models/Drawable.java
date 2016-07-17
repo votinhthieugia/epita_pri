@@ -1,6 +1,9 @@
 package fr.epita.pri.rackrepresentator.models;
 
-public class Drawable {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Drawable {
 	protected Drawable parent;
 	protected String name;
 	protected String description;
@@ -10,12 +13,32 @@ public class Drawable {
 	protected int height;
 	protected boolean shouldDraw;
 	protected boolean shouldDrawChildren;
+	protected List<Drawable> children;
 	
 	public Drawable(String name, String description) {
 		this.name = name;
 		this.description = description;
 		shouldDraw = true;
 		shouldDrawChildren = true;
+		children = new ArrayList<>();
+	}
+	
+	public void addSon(Drawable son) {
+		son.setParent(this);
+		children.add(son);
+	}
+
+	public void removeSon(Drawable son) {
+		children.remove(son);
+	}
+	
+
+	public List<Drawable> getChildren() {
+		return children;
+	}
+
+	public void setCenters(List<Drawable> sons) {
+		this.children = sons;
 	}
 	
 	public void position(int x, int y, int width, int height) {
@@ -93,17 +116,45 @@ public class Drawable {
 		return parent;
 	}
 
+	public List<Drawable> getBrothers() {
+		return parent.getChildren();
+	}
+	
 	public void setParent(Drawable parent) {
 		this.parent = parent;
+	}
+	
+	public Drawable findByName(String name) {
+		for (int i = 0; i < children.size(); i++) {
+			if (children.get(i).getName().equals(name)) {
+				return children.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public boolean isInPosition(int x, int y) {
 		return this.x <= x && x <= this.x + width &&
 				this.y <= y && y <= this.y + height;
 	}
-	
+
 	public Drawable findDrawableWithPosition(int x, int y) {
-		if (isInPosition(x, y)) return this;
-		return null;
+		Drawable found = null;
+		for (int i = 0; i < children.size(); i++) {
+			Drawable d = children.get(i);
+			
+			found = d.findDrawableWithPosition(x, y);
+			if (found != null) {
+				break;
+			}
+			found = null;
+		}
+		
+		if (found == null && isInPosition(x, y) && shouldDraw) 
+			found = this;
+		
+		return found;
 	}
+	
+	public abstract boolean hasChildrenToShow();
 }

@@ -24,7 +24,6 @@ public class BottomFrame extends BaseFrame {
 		JScrollPane scroll = new JScrollPane(txtAreaConsole, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		txtAreaConsole.setText("Console Example \r\n Ipsum \r\n Lorem \r\n Test");
 		add(scroll, BorderLayout.CENTER);
 		setBorder(BorderFactory.createLineBorder(Color.black, 2));
 	}

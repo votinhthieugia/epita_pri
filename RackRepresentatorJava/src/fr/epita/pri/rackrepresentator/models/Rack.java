@@ -1,33 +1,19 @@
 package fr.epita.pri.rackrepresentator.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Rack extends Drawable {
 	private int index;
 	private int dataCenterIndex;
-	private List<Server> servers;
 	
 	public Rack(String name, String description, int dataCenterIndex, int index) {
 		super(name, description);
+		
 		this.index = index;
 		this.dataCenterIndex = dataCenterIndex;
-		this.servers = new ArrayList<Server>();
-	}
-	
-	public void addServer(Server server) {
-		server.setParent(this);
-		servers.add(server);
-	}
-	
-	public void removeServer(Server server) {
-		server.setParent(null);
-		servers.remove(server);
 	}
 	
 	public Server find(int index) {
-		for (int i = 0; i < servers.size(); i++) {
-			Server server = servers.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Server server = (Server) children.get(i);
 			if (server.getIndex() == index) {
 				return server;
 			}
@@ -37,12 +23,12 @@ public class Rack extends Drawable {
 	}
 	
 	public Server findByIndex(int index) {
-		return index < servers.size() ? servers.get(index) : null;
+		return (Server) (index < children.size() ? children.get(index) : null);
 	}
 	
 	public Server findByLowHigh(int low, int high) {
-		for (int i = 0; i < servers.size(); i++) {
-			Server server = servers.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Server server = (Server) children.get(i);
 			if (server.getLow() == low && server.getHigh() == high) {
 				return server;
 			}
@@ -51,14 +37,6 @@ public class Rack extends Drawable {
 		return null;
 	}
 	
-	public List<Server> getServers() {
-		return servers;
-	}
-
-	public void setServers(List<Server> servers) {
-		this.servers = servers;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -93,19 +71,12 @@ public class Rack extends Drawable {
 	
 	public int getNumServers() {
 		int count = 0;
-		for (Server s : servers) count += s.count();
+		for (Drawable s : children) count += ((Server) s).count();
 		return count;
 	}
 
 	@Override
-	public Drawable findDrawableWithPosition(int x, int y) {
-		Drawable found = null;
-		for (Server s : servers) {
-			found = s.findDrawableWithPosition(x, y);
-			if (found != null) break;
-			found = null;
-		}
-		if (found == null && isInPosition(x, y)) found = this;
-		return found;
+	public boolean hasChildrenToShow() {
+		return false;
 	}
 }

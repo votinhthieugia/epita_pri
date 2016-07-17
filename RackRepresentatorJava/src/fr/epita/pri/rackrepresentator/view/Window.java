@@ -1,7 +1,7 @@
 package fr.epita.pri.rackrepresentator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,9 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 
 import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.main.SessionController;
@@ -41,7 +39,7 @@ public class Window extends BaseView implements ActionListener {
 //        frames[FrameId.SIDE] = sideFrame;
 //        getContentPane().add(sideFrame, BorderLayout.WEST);
         
-        Console.Instance().setConsoleComponent(bottomFrame.getTxtAreaConsole());
+        Console.setConsoleComponent(bottomFrame.getTxtAreaConsole());
         
         MainFrame mainFrame = new MainFrame(this);
         mainFrame.setBounds(111, 116, 2000, 1000);
@@ -55,8 +53,13 @@ public class Window extends BaseView implements ActionListener {
         createMenu();
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
-        this.setVisible(true);
+
+		setPreferredSize(new Dimension(800, 600));
+		pack();
+		setLocationRelativeTo(null);
+		
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
 	}
 	
 	private void createMenu() {
@@ -83,10 +86,13 @@ public class Window extends BaseView implements ActionListener {
 		menuItem = new JMenuItem("Profile");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Manage");
-		menuItem.addActionListener(this);
-		menu.add(menuItem);
-		menuBar.add(menu);
+		
+		if (SessionController.isAdminSession()) {
+			menuItem = new JMenuItem("Manage");
+			menuItem.addActionListener(this);
+			menu.add(menuItem);
+			menuBar.add(menu);
+		}
 		
 		setJMenuBar(menuBar);
 	}
