@@ -74,7 +74,7 @@ public class ExcelLoader implements IDataLoader {
 				DataCenter dc = (DataCenter) system.findByName(dcName);
 				
 				if (dc == null) {
-					dc = new DataCenter(dcName, dcName, system.getSons().size());
+					dc = new DataCenter(dcName, dcName, system.getChildren().size());
 					system.addSon(dc);
 				}
 				
@@ -82,13 +82,13 @@ public class ExcelLoader implements IDataLoader {
 				Rack rack = (Rack) dc.findByName(rackName);
 				
 				if (rack == null) {
-					rack = new Rack(rackName, rackName, dc.getIndex(), dc.getSons().size());
+					rack = new Rack(rackName, rackName, dc.getIndex(), dc.getChildren().size());
 					dc.addSon(rack);
 				}
 				
 				Server server = new Server(row.getCell(ColumnName.CiName.ordinal()).getStringCellValue(), 
 											row.getCell(ColumnName.CiDescription.ordinal()).getStringCellValue(), 
-											rack.getSons().size());
+											rack.getChildren().size());
 				server.setLow((int)row.getCell(ColumnName.Low.ordinal()).getNumericCellValue());
 				server.setHigh((int)row.getCell(ColumnName.High.ordinal()).getNumericCellValue());
 				server.setStartsAt((int)row.getCell(ColumnName.StartsAt.ordinal()).getNumericCellValue());

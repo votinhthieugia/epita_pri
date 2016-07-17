@@ -2,6 +2,7 @@ package fr.epita.pri.rackrepresentator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -40,8 +41,13 @@ public class Window extends JFrame {
         getContentPane().add(scroll, BorderLayout.CENTER);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);        
-        this.setVisible(true);
+
+		setPreferredSize(new Dimension(800, 600));
+		pack();
+		setLocationRelativeTo(null);
+		
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
 	}
 	
 	public BaseFrame getFrame(int frameId) {

@@ -12,8 +12,9 @@ import javax.swing.JLabel;
 
 public class SideFrame extends BaseFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	JButton btnLoad;
-	JButton btnSettings;
+	private JButton btnLoad;
+	private JButton btnSettings;
+	private JButton btnBack;
 	
 	public SideFrame(Window manager) {
 		super(manager);
@@ -45,6 +46,13 @@ public class SideFrame extends BaseFrame implements ActionListener {
 		add(new JLabel(" "));
 		JButton btnExport = new JButton("Export");
 		btnExport.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(btnExport);
+		
+		add(new JLabel(" "));
+		btnBack = new JButton("Back");
+		btnBack.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnBack.addActionListener(this);
+		add(btnBack);
 	}
 
 	void onLoadBtnClicked() {
@@ -56,11 +64,18 @@ public class SideFrame extends BaseFrame implements ActionListener {
 		}
 	}
 	
+	void onBackBtnClicked() {
+		MainFrame mainFrame = (MainFrame)manager.getFrame(FrameId.MAIN);
+		mainFrame.back();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLoad) {
             onLoadBtnClicked();
 		} else if (e.getSource() == btnSettings) {
+		}else if (e.getSource() == btnBack) {
+			onBackBtnClicked();
 		}
 	}
 	

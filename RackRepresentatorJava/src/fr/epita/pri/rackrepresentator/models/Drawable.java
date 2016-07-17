@@ -13,32 +13,32 @@ public class Drawable {
 	protected int height;
 	protected boolean shouldDraw;
 	protected boolean shouldDrawChildren;
-	protected List<Drawable> sons;
+	protected List<Drawable> children;
 	
 	public Drawable(String name, String description) {
 		this.name = name;
 		this.description = description;
 		shouldDraw = true;
 		shouldDrawChildren = true;
-		sons = new ArrayList<>();
+		children = new ArrayList<>();
 	}
 	
 	public void addSon(Drawable son) {
 		son.setParent(this);
-		sons.add(son);
+		children.add(son);
 	}
 
 	public void removeSon(Drawable son) {
-		sons.remove(son);
+		children.remove(son);
 	}
 	
 
-	public List<Drawable> getSons() {
-		return sons;
+	public List<Drawable> getChildren() {
+		return children;
 	}
 
 	public void setCenters(List<Drawable> sons) {
-		this.sons = sons;
+		this.children = sons;
 	}
 	
 	public void position(int x, int y, int width, int height) {
@@ -117,7 +117,7 @@ public class Drawable {
 	}
 
 	public List<Drawable> getBrothers() {
-		return parent.getSons();
+		return parent.getChildren();
 	}
 	
 	public void setParent(Drawable parent) {
@@ -125,9 +125,9 @@ public class Drawable {
 	}
 	
 	public Drawable findByName(String name) {
-		for (int i = 0; i < sons.size(); i++) {
-			if (sons.get(i).getName().equals(name)) {
-				return sons.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			if (children.get(i).getName().equals(name)) {
+				return children.get(i);
 			}
 		}
 		return null;
@@ -140,19 +140,17 @@ public class Drawable {
 
 	public Drawable findDrawableWithPosition(int x, int y) {
 		Drawable found = null;
-		for (int i = 0; i < sons.size(); i++) {
-			Drawable d = sons.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Drawable d = children.get(i);
 			
 			found = d.findDrawableWithPosition(x, y);
-			if (found != null) break;
+			if (found != null) {
+				break;
+			}
 			found = null;
 		}
-		if (found == null && isInPosition(x, y)) found = this;
+		
+		if (found == null && isInPosition(x, y) && shouldDraw) found = this;
 		return found;
 	}
-	
-//	public Drawable findDrawableWithPosition(int x, int y) {
-//		if (isInPosition(x, y)) return this;
-//		return null;
-//	}
 }

@@ -18,9 +18,10 @@ import fr.epita.view.extras.DisplayMore;
 public class MainFrame extends BaseFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
-	Drawable drawableData;
-	IDataLoader dataLoader;
-	DisplayMore displayMore;
+	private Drawable drawableData;
+	private IDataLoader dataLoader;
+	private DisplayMore displayMore;
+	private Drawable actualView;
 
 	public MainFrame(Window manager) {
 		super(manager);
@@ -44,6 +45,20 @@ public class MainFrame extends BaseFrame implements MouseListener {
 		repaint();
 	}
 
+	public void back() {
+		for (Drawable d : actualView.getBrothers()) {
+			d.setShouldDraw(true);
+		} 
+
+		actualView.setShouldDrawChildren(false);
+		
+		for (Drawable d : actualView.getChildren()) {
+			d.setShouldDraw(false);
+		}
+
+		repaint();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -60,44 +75,46 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
 	public void mouseClicked(MouseEvent e) {
 
 		if (drawableData != null) {
-			Drawable drawable = drawableData.findDrawableWithPosition(e.getX(), e.getY());
+			actualView = drawableData.findDrawableWithPosition(e.getX(), e.getY());
 
-			if (drawable != null) {
+			if (actualView != null) {
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					displayMore.show(drawable, drawable.getX() + drawable.getWidth(), e.getY());
+					displayMore.show(actualView, actualView.getX() + actualView.getWidth(), e.getY());
+					
 				} else if (e.getButton() == MouseEvent.BUTTON1) {
-
-					for (Drawable d : drawable.getBrothers()) {
+					for (Drawable d : actualView.getBrothers()) {
 						d.setShouldDraw(false);
 					} 
 
-					drawable.setShouldDrawChildren(true);
+					actualView.setShouldDrawChildren(true);
+					for (Drawable d : actualView.getChildren()) {
+//						d.setShouldDraw(true);
+					}
 				}
-
 			} else {
 				displayMore.hideAll();
 			}
 
 			repaint();
 		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 	}
 }

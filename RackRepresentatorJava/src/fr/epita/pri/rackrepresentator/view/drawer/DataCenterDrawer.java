@@ -25,7 +25,7 @@ public class DataCenterDrawer implements IDrawer {
 		}
 
 		if (dc.isShouldDrawChildren()) {
-			List<Drawable> racks = dc.getSons();
+			List<Drawable> racks = dc.getChildren();
 			IDrawer rackDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.RACK);
 			for (int i = 0; i < racks.size(); i++) {
 				Rack rack = (Rack) racks.get(i);

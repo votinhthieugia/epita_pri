@@ -12,8 +12,8 @@ public class Rack extends Drawable {
 	}
 	
 	public Server find(int index) {
-		for (int i = 0; i < sons.size(); i++) {
-			Server server = (Server) sons.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Server server = (Server) children.get(i);
 			if (server.getIndex() == index) {
 				return server;
 			}
@@ -23,12 +23,12 @@ public class Rack extends Drawable {
 	}
 	
 	public Server findByIndex(int index) {
-		return (Server) (index < sons.size() ? sons.get(index) : null);
+		return (Server) (index < children.size() ? children.get(index) : null);
 	}
 	
 	public Server findByLowHigh(int low, int high) {
-		for (int i = 0; i < sons.size(); i++) {
-			Server server = (Server) sons.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Server server = (Server) children.get(i);
 			if (server.getLow() == low && server.getHigh() == high) {
 				return server;
 			}
@@ -71,7 +71,7 @@ public class Rack extends Drawable {
 	
 	public int getNumServers() {
 		int count = 0;
-		for (Drawable s : sons) count += ((Server) s).count();
+		for (Drawable s : children) count += ((Server) s).count();
 		return count;
 	}
 }

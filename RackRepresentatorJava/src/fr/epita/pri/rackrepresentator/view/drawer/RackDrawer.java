@@ -30,7 +30,7 @@ public class RackDrawer implements IDrawer {
 		}		
 		
 		if (rack.isShouldDrawChildren()) {			
-			List<Drawable> servers = rack.getSons();
+			List<Drawable> servers = rack.getChildren();
 			IDrawer serverDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.SERVER);
 
 			for (int i = 0; i < servers.size(); i++) {

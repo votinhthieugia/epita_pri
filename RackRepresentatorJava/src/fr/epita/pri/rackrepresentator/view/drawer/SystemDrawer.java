@@ -21,7 +21,7 @@ public class SystemDrawer implements IDrawer {
 		
 		if (system.isShouldDrawChildren()) {
 			IDrawer dataCenterDrawer = Drawer.Instance().getDrawer(Drawer.DrawableType.DATA_CENTER);
-			List<Drawable> centers = system.getSons();
+			List<Drawable> centers = system.getChildren();
 			
 			int i=0;
 			for (Drawable center : centers){				
