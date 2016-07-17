@@ -18,4 +18,9 @@ public class DataCenter extends Drawable {
 	public void setIndex(int index) {
 		this.index = index;
 	}
+	
+	@Override
+	public boolean hasChildrenToShow() {
+		return true;
+	}
 }

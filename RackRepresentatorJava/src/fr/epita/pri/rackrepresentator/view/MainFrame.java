@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import fr.epita.pri.rackrepresentator.data.ExcelLoader;
 import fr.epita.pri.rackrepresentator.data.IDataLoader;
 import fr.epita.pri.rackrepresentator.models.Drawable;
+import fr.epita.pri.rackrepresentator.models.Rack;
 import fr.epita.pri.rackrepresentator.view.drawer.Drawer;
 import fr.epita.view.extras.DisplayMore;
 
@@ -48,17 +49,17 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	public void back() {
 		for (Drawable d : actualView.getBrothers()) {
 			d.setShouldDraw(true);
-		} 
+		}
 
 		actualView.setShouldDrawChildren(false);
-		
+
 		for (Drawable d : actualView.getChildren()) {
 			d.setShouldDraw(false);
 		}
 
 		repaint();
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -78,21 +79,24 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 
 		if (drawableData != null) {
-			actualView = drawableData.findDrawableWithPosition(e.getX(), e.getY());
+			Drawable drawable = drawableData.findDrawableWithPosition(e.getX(), e.getY());
 
-			if (actualView != null) {
+			if (drawable != null) {
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					displayMore.show(actualView, actualView.getX() + actualView.getWidth(), e.getY());
-					
-				} else if (e.getButton() == MouseEvent.BUTTON1) {
-					for (Drawable d : actualView.getBrothers()) {
-						d.setShouldDraw(false);
-					} 
+					displayMore.show(drawable, drawable.getX() + drawable.getWidth(), e.getY());
 
-					actualView.setShouldDrawChildren(true);
-					for (Drawable d : actualView.getChildren()) {
-//						d.setShouldDraw(true);
+				} else if ((e.getButton() == MouseEvent.BUTTON1) && drawable.hasChildrenToShow()) {
+
+					for (Drawable d : drawable.getBrothers()) {
+						d.setShouldDraw(false);
 					}
+
+					drawable.setShouldDrawChildren(true);
+					for (Drawable d : drawable.getChildren()) {
+						d.setShouldDraw(true);
+					}
+					
+					actualView = drawable;
 				}
 			} else {
 				displayMore.hideAll();

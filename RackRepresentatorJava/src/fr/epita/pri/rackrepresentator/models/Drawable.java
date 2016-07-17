@@ -3,7 +3,7 @@ package fr.epita.pri.rackrepresentator.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Drawable {
+public abstract class Drawable {
 	protected Drawable parent;
 	protected String name;
 	protected String description;
@@ -150,7 +150,11 @@ public class Drawable {
 			found = null;
 		}
 		
-		if (found == null && isInPosition(x, y) && shouldDraw) found = this;
+		if (found == null && isInPosition(x, y) && shouldDraw) 
+			found = this;
+		
 		return found;
 	}
+	
+	public abstract boolean hasChildrenToShow();
 }

@@ -74,4 +74,9 @@ public class Rack extends Drawable {
 		for (Drawable s : children) count += ((Server) s).count();
 		return count;
 	}
+
+	@Override
+	public boolean hasChildrenToShow() {
+		return false;
+	}
 }
