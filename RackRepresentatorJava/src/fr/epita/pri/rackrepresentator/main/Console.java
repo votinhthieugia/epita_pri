@@ -9,7 +9,11 @@ public class Console {
 	public static void setConsoleComponent(JTextArea txtArea){
 		Console.txtArea = txtArea;
 	}
-		
+	
+	public static void error(String str){
+		info(str, true);
+	}
+	
 	public static void info(String str){
 		info(str, true);
 	}

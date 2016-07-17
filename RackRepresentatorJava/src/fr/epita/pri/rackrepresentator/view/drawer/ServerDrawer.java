@@ -9,10 +9,10 @@ import fr.epita.pri.rackrepresentator.models.Server;
 import fr.epita.pri.rackrepresentator.models.ServerProp;
 import fr.epita.pri.rackrepresentator.models.ServerState;
 import fr.epita.pri.rackrepresentator.view.drawer.primitives.Primitives;
+import fr.epita.view.extras.Utils;
 
 public class ServerDrawer implements IDrawer {
 
-	private static final int TEXT_PADDING_HORIZONTAL_Y = 13;
 	private static final int TEXT_PADDING_VERTICAL_X = 13;
 	private static final int ROUND_VALUE = 20;
 
@@ -23,13 +23,13 @@ public class ServerDrawer implements IDrawer {
 		Primitives.fillRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), ROUND_VALUE, ROUND_VALUE, getServerColor(server));
 		Primitives.drawRoundRectangle(g, server.getX(), server.getY(), server.getWidth(), server.getHeight(), ROUND_VALUE, ROUND_VALUE, Color.gray);
 
-		if (server.getWidth() < server.getHeight()) {
+		if (server.getWidth() == RackDrawer.BLADE_SERVER_WIDTH) {
 
 			Graphics2D g2 = (Graphics2D) g.create();
 			Primitives.drawTextRotate(g2, server.getX()+TEXT_PADDING_VERTICAL_X, server.getY() + server.getHeight(), -90, server.getName(),
 					Color.black);
 		} else
-			Primitives.drawText(g, server.getX(), server.getY() + TEXT_PADDING_HORIZONTAL_Y, server.getName(), Color.black);
+			Utils.writeCenteredNameInDrawable(g, server, Color.BLACK);
 	}
 
 	private Color getServerColor(Server server) {

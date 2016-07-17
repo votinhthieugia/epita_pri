@@ -37,14 +37,8 @@ public class ExcelLoader implements IDataLoader {
 	@Override
 	public Drawable loadAll() {
 		
-//		String fileName = "C:\\Users\\Gustavo\\Downloads\\DatacentreRack.xlsx";
-		String fileName = "/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx";
-		
-		Console.info("Loading File: " + fileName + " ... ", false);
-		Drawable d = loadAllFromFile(fileName);
-		Console.info("OK!");
-		
-		return d;
+//		return loadAllFromFile("C:\\Users\\Gustavo\\Downloads\\DatacentreRack.xlsx");
+		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx");
 	}
 
 	@Override
@@ -64,6 +58,8 @@ public class ExcelLoader implements IDataLoader {
 
 	@Override
 	public Drawable loadAllFromFile(String filePath) {
+		Console.info("Loading File: " + filePath + " ... ", false);
+		
 		DataSystem system = new DataSystem("IBM", "Data Centre Rack");
 		
 		try {
@@ -75,24 +71,24 @@ public class ExcelLoader implements IDataLoader {
 				Row row = sheet.getRow(i);
 				if (row == null || row.getCell(0).getCellType() == Cell.CELL_TYPE_BLANK) break;
 				String dcName = row.getCell(ColumnName.DataCenterName.ordinal()).getStringCellValue();
-				DataCenter dc = system.findByName(dcName);
+				DataCenter dc = (DataCenter) system.findByName(dcName);
 				
 				if (dc == null) {
-					dc = new DataCenter(dcName, dcName, system.getCenters().size());
-					system.addCenter(dc);
+					dc = new DataCenter(dcName, dcName, system.getSons().size());
+					system.addSon(dc);
 				}
 				
 				String rackName = row.getCell(ColumnName.Rack.ordinal()).getStringCellValue();
-				Rack rack = dc.findByName(rackName);
+				Rack rack = (Rack) dc.findByName(rackName);
 				
 				if (rack == null) {
-					rack = new Rack(rackName, rackName, dc.getIndex(), dc.getRacks().size());
-					dc.addRack(rack);
+					rack = new Rack(rackName, rackName, dc.getIndex(), dc.getSons().size());
+					dc.addSon(rack);
 				}
 				
 				Server server = new Server(row.getCell(ColumnName.CiName.ordinal()).getStringCellValue(), 
 											row.getCell(ColumnName.CiDescription.ordinal()).getStringCellValue(), 
-											rack.getServers().size());
+											rack.getSons().size());
 				server.setLow((int)row.getCell(ColumnName.Low.ordinal()).getNumericCellValue());
 				server.setHigh((int)row.getCell(ColumnName.High.ordinal()).getNumericCellValue());
 				server.setStartsAt((int)row.getCell(ColumnName.StartsAt.ordinal()).getNumericCellValue());
@@ -114,12 +110,15 @@ public class ExcelLoader implements IDataLoader {
 					server.setNext(bladeServer.getNext());
 					bladeServer.setNext(server);
 				} else {
-					rack.addServer(server);
+					rack.addSon(server);
 				}
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
+			Console.error(exception.getMessage());
 		}
+		
+		Console.info("OK!");
 		
 		return system;
 	}
