@@ -28,7 +28,7 @@ public class Window extends JFrame {
         getContentPane().add(sideFrame, BorderLayout.WEST);
         getContentPane().add(bottomFrame, BorderLayout.SOUTH);
         
-        Console.Instance().setConsoleComponent(bottomFrame.getTxtAreaConsole());
+        Console.setConsoleComponent(bottomFrame.getTxtAreaConsole());
         
         MainFrame mainFrame = new MainFrame(this);
         mainFrame.setBounds(111, 116, 2000, 1000);

@@ -4,26 +4,19 @@ import javax.swing.JTextArea;
 
 public class Console {
 	
-	private JTextArea txtArea;
-	private static Console singleton = new Console();
+	private static JTextArea txtArea;
 	
-	private Console(){
-//		this.txtArea = txtArea;
+	public static void setConsoleComponent(JTextArea txtArea){
+		Console.txtArea = txtArea;
+	}
+		
+	public static void info(String str){
+		info(str, true);
 	}
 	
-	private Console(JTextArea txtArea){
-		this.txtArea = txtArea;
-	}
-	
-	public void setConsoleComponent(JTextArea txtArea){
-		this.txtArea = txtArea;
-	}
-	
-	public static Console Instance(){		
-			return singleton;
-	}
-	
-	public void info(String str){
-		txtArea.append("\n" + str);
+	public static void info(String str, boolean skipLine){
+		txtArea.append(str);
+		if(skipLine)
+			txtArea.append("\n");
 	}
 }
