@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 
 import fr.epita.pri.rackrepresentator.data.ExcelLoader;
 import fr.epita.pri.rackrepresentator.data.IDataLoader;
+import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.models.Drawable;
-import fr.epita.pri.rackrepresentator.models.Rack;
 import fr.epita.pri.rackrepresentator.view.drawer.Drawer;
 import fr.epita.view.extras.DisplayMore;
 
@@ -47,17 +47,21 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	}
 
 	public void back() {
-		for (Drawable d : actualView.getBrothers()) {
-			d.setShouldDraw(true);
+		if (actualView != null && actualView.getParent() != null) {
+			for (Drawable d : actualView.getBrothers()) {
+				d.setShouldDraw(true);
+			}
+
+			actualView.setShouldDrawChildren(false);
+
+			for (Drawable d : actualView.getChildren()) {
+				d.setShouldDraw(false);
+			}
+
+			actualView = actualView.getParent();
+			Console.info("showing: " + actualView.getName());
+			repaint();
 		}
-
-		actualView.setShouldDrawChildren(false);
-
-		for (Drawable d : actualView.getChildren()) {
-			d.setShouldDraw(false);
-		}
-
-		repaint();
 	}
 
 	@Override
@@ -78,10 +82,13 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
+		displayMore.hideAll();
+		
 		if (drawableData != null) {
 			Drawable drawable = drawableData.findDrawableWithPosition(e.getX(), e.getY());
-
+			
 			if (drawable != null) {
+				Console.info("showing: " + drawable.getName());
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					displayMore.show(drawable, drawable.getX() + drawable.getWidth(), e.getY());
 
@@ -95,12 +102,10 @@ public class MainFrame extends BaseFrame implements MouseListener {
 					for (Drawable d : drawable.getChildren()) {
 						d.setShouldDraw(true);
 					}
-					
+
 					actualView = drawable;
 				}
-			} else {
-				displayMore.hideAll();
-			}
+			} 
 
 			repaint();
 		}

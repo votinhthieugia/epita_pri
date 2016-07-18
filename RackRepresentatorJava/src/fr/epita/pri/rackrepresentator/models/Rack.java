@@ -79,4 +79,12 @@ public class Rack extends Drawable {
 	public boolean hasChildrenToShow() {
 		return false;
 	}
+
+	@Override
+	public void setShouldDraw(boolean shouldDraw) {
+		this.shouldDraw = shouldDraw;
+		for (Drawable drawable : children) {
+			drawable.shouldDraw = shouldDraw;
+		}
+	}
 }

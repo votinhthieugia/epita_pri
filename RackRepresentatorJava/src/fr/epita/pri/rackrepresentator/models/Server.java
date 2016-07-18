@@ -21,7 +21,7 @@ public class Server extends Drawable implements Iterator<Server> {
 	private String serialNumber;
 	private Server next;
 	private Server iterator;
-	
+
 	public Server(String name, String description, int index) {
 		super(name, description);
 		this.index = index;
@@ -30,7 +30,7 @@ public class Server extends Drawable implements Iterator<Server> {
 		this.scope = new ServerScope();
 		this.state = new ServerState();
 	}
-	
+
 	public Server(String name, String description, int index, int state, int prop, int scope) {
 		super(name, description);
 		this.index = index;
@@ -39,7 +39,7 @@ public class Server extends Drawable implements Iterator<Server> {
 		this.scope = new ServerScope(scope);
 		this.iterator = this;
 	}
-	
+
 	public Server(String name, String description, int index, int roomIndex, int state, int prop, int scope) {
 		super(name, description);
 		this.index = index;
@@ -48,7 +48,7 @@ public class Server extends Drawable implements Iterator<Server> {
 		this.prop = new ServerProp(prop);
 		this.iterator = this;
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -200,20 +200,23 @@ public class Server extends Drawable implements Iterator<Server> {
 
 	public void setNext(Server next) {
 		this.next = next;
-		if (next != null) next.setParent(parent);
+		if (next != null)
+			next.setParent(parent);
 	}
 
 	@Override
 	public Drawable findDrawableWithPosition(int x, int y) {
 		Drawable found = null;
+
 		resetIterator();
-		
+
 		while (hasNext()) {
 			found = next();
-			if (found.isInPosition(x, y)) break; 
+			if (found.isInPosition(x, y))
+				break;
 			found = null;
 		}
-		
+
 		resetIterator();
 		return found;
 	}
@@ -227,7 +230,7 @@ public class Server extends Drawable implements Iterator<Server> {
 		}
 		return c;
 	}
-	
+
 	public void resetIterator() {
 		iterator = this;
 	}
@@ -247,9 +250,5 @@ public class Server extends Drawable implements Iterator<Server> {
 	@Override
 	public boolean hasChildrenToShow() {
 		return false;
-	}
-
-	@Override
-	public void remove() {
 	}
 }

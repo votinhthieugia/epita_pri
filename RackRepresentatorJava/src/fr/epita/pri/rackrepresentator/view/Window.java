@@ -1,10 +1,11 @@
 package fr.epita.pri.rackrepresentator.view;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -28,28 +29,27 @@ public class Window extends BaseView implements ActionListener {
 		setViewId(ViewId.Main);
 		
 		frames = new BaseFrame[FrameId.TOTAL];
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        
+        TopFrame topFrame = new TopFrame(this);
+        topFrame.setBackground(Color.DARK_GRAY);
+        frames[FrameId.TOP] = topFrame;
         
         BottomFrame bottomFrame = new BottomFrame(this);
         frames[FrameId.BOTTOM] = bottomFrame;
-        getContentPane().setLayout(new BorderLayout(0, 0));
-        getContentPane().add(bottomFrame, BorderLayout.SOUTH);
-        
-//        SideFrame sideFrame = new SideFrame(this);
-//        sideFrame.setBackground(Color.DARK_GRAY);
-//        frames[FrameId.SIDE] = sideFrame;
-//        getContentPane().add(sideFrame, BorderLayout.WEST);
-        
+        bottomFrame.setMinimumSize(new Dimension(0, 100));
         Console.setConsoleComponent(bottomFrame.getTxtAreaConsole());
         
         MainFrame mainFrame = new MainFrame(this);
-        mainFrame.setBounds(111, 116, 2000, 1000);
         frames[FrameId.MAIN] = mainFrame;
-
+        
         JScrollPane scroll = new JScrollPane(mainFrame, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
     			JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        
-        getContentPane().add(scroll, BorderLayout.CENTER);
-        
+
+        getContentPane().add(topFrame);
+        getContentPane().add(scroll);
+        getContentPane().add(bottomFrame);
+                
         createMenu();
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
