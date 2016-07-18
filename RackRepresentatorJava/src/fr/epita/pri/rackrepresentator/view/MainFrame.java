@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import fr.epita.pri.rackrepresentator.data.ExcelLoader;
 import fr.epita.pri.rackrepresentator.data.IDataLoader;
 import fr.epita.pri.rackrepresentator.models.Drawable;
-import fr.epita.pri.rackrepresentator.models.Rack;
 import fr.epita.pri.rackrepresentator.view.drawer.Drawer;
 import fr.epita.view.extras.DisplayMore;
 

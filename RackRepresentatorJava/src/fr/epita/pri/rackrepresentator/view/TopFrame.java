@@ -10,15 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
-public class SideFrame extends BaseFrame implements ActionListener {
+public class TopFrame extends BaseFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JButton btnLoad;
 	private JButton btnSettings;
 	private JButton btnBack;
 	
-	public SideFrame(Window manager) {
+	public TopFrame(Window manager) {
 		super(manager);
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JLabel label = new JLabel("Admin");
 		add(label);		
