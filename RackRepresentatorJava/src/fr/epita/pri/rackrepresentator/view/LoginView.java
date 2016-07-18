@@ -1,5 +1,6 @@
 package fr.epita.pri.rackrepresentator.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import fr.epita.pri.rackrepresentator.daos.IUserDao;
+import fr.epita.pri.rackrepresentator.daos.UserDao;
+import fr.epita.pri.rackrepresentator.encryption.MD5Encryptor;
 import fr.epita.pri.rackrepresentator.main.SessionController;
+import fr.epita.pri.rackrepresentator.models.User;
 
 public class LoginView extends BaseView implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -21,10 +26,19 @@ public class LoginView extends BaseView implements ActionListener {
 	private JPasswordField passwordTextField;
 	private JButton buttonAccept;
 	private JButton buttonQuit;
+	private IUserDao userDao;
+	private boolean isAdminSetup;
 
 	public LoginView(String name, IViewController controller) {
 		super(name, controller);
 		setViewId(ViewId.Login);
+		
+		userDao = new UserDao(new MD5Encryptor());
+		try {
+			isAdminSetup = userDao.isAdminSetup();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 401, 300);
@@ -37,6 +51,14 @@ public class LoginView extends BaseView implements ActionListener {
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTitle.setBounds(38, 0, 100, 100);
 		getContentPane().add(lblTitle);
+		
+		if (!isAdminSetup) {
+			JLabel lblMessage = new JLabel("Type in your name and password to create admin account!");
+			lblMessage.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			lblMessage.setForeground(Color.red);
+			lblMessage.setBounds(38, 20, 400, 100);
+			getContentPane().add(lblMessage);
+		}
 		
 		JLabel lblUsername = new JLabel("User Name");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -72,6 +94,7 @@ public class LoginView extends BaseView implements ActionListener {
 		
 		setVisible(true);
 		setResizable(false);
+		setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -86,6 +109,15 @@ public class LoginView extends BaseView implements ActionListener {
 	private void login() {
 		String username = userTextField.getText();
         String password = String.copyValueOf(passwordTextField.getPassword());
+        
+        if (!isAdminSetup) {
+        	try {
+        		userDao.create(new User(username, password, User.Admin));
+        	} catch (Exception ex) {
+        		ex.printStackTrace();
+        	}
+        }
+        
         SessionController.create(username, password);
         
         if (SessionController.exists()) {

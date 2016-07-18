@@ -10,11 +10,14 @@ public class SqlDao {
 	}
 	
 	protected String getConnectionString() {
-		return "jdbc:mysql://localhost:3306/pri";
+//		return "jdbc:mysql://localhost:3306/pri";
+		return "jdbc:sqlite:resources/pri.db";
 	}
 	
 	protected Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
-		return DriverManager.getConnection(getConnectionString(), "root", "");
+		Class.forName("org.sqlite.JDBC");
+//		return DriverManager.getConnection(getConnectionString(), "root", "");
+		return DriverManager.getConnection(getConnectionString());
 	}
 	
 	public void closeConnection(Connection connection) {

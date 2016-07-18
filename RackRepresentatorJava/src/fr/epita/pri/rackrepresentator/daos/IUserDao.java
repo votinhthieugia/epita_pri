@@ -5,6 +5,7 @@ import java.util.List;
 import fr.epita.pri.rackrepresentator.models.User;
 
 public interface IUserDao {
+	public boolean isAdminSetup() throws Exception;
 	public User authenticate(String userName, String password) throws Exception;
 	public List<User> getAll() throws Exception;
 	public List<User> findByName(String name) throws Exception;

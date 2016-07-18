@@ -79,20 +79,19 @@ public class Window extends BaseView implements ActionListener {
 		menu.add(menuItem);
 		menuBar.add(menu);
 		
-		menu = new JMenu("User");
-		menuItem = new JMenuItem("Logout");
-		menuItem.addActionListener(this);
-		menu.add(menuItem);
-		menuItem = new JMenuItem("Profile");
-		menuItem.addActionListener(this);
-		menu.add(menuItem);
-		
 		if (SessionController.isAdminSession()) {
-			menuItem = new JMenuItem("Manage");
+			menu = new JMenu("Manage");
+			menuItem = new JMenuItem("User");
 			menuItem.addActionListener(this);
 			menu.add(menuItem);
 			menuBar.add(menu);
 		}
+		
+		menu = new JMenu(SessionController.getUser().getName());
+		menuItem = new JMenuItem("Logout");
+		menuItem.addActionListener(this);
+		menu.add(menuItem);
+		menuBar.add(menu);
 		
 		setJMenuBar(menuBar);
 	}
@@ -110,8 +109,10 @@ public class Window extends BaseView implements ActionListener {
 			JMenuItem menuItem = (JMenuItem)e.getSource();
 			switch (menuItem.getText()) {
 			case "About Us":
+				controller.show(ViewId.About);
 				break;
 			case "Setting":
+				controller.show(ViewId.Setting);
 				break;
 			case "Open":
 				final JFileChooser fc = new JFileChooser();
@@ -125,9 +126,7 @@ public class Window extends BaseView implements ActionListener {
 				SessionController.destroy();
 				controller.restart();
 				break;
-			case "Profile":
-				break;
-			case "Manage":
+			case "User":
 				controller.show(ViewId.ManageUser);
 				break;
 			default:

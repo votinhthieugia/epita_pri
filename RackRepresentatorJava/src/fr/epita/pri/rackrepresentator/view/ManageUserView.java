@@ -155,6 +155,7 @@ public class ManageUserView extends BaseView implements ActionListener, ListSele
 		
 		setVisible(true);
 		setResizable(false);
+		setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -209,7 +210,6 @@ public class ManageUserView extends BaseView implements ActionListener, ListSele
 			}
 		} else if (e.getSource() == buttonCreate) {
 			User user = new User(newNameTextField.getText(), String.copyValueOf(newPasswordTextField.getPassword()), User.Normal);
-			System.out.println(user.getName() + " " + String.copyValueOf(newPasswordTextField.getPassword()));
 			try {
 				userDao.create(user);
 				if (tableModel != null) tableModel.addRow(new Object[] { user.getName(), user.isAdmin() ? "Admin" : "User"});

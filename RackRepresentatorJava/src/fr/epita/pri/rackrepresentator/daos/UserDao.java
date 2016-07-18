@@ -15,6 +15,28 @@ public class UserDao extends SqlDao implements IUserDao {
 	public UserDao(IEncryptor encryptor) {
 		this.encryptor = encryptor;
 	}
+	
+	public boolean isAdminSetup() throws Exception {
+		Connection connection = getConnection();
+		
+		if (connection != null) {
+			String query = "select * from users where type = ?";
+			boolean isSetup = false;
+			
+			try (PreparedStatement statement = connection.prepareStatement(query)) {
+				statement.setInt(1, User.Admin);
+				ResultSet resultSet = statement.executeQuery();
+				isSetup = resultSet.next();
+				resultSet.close();
+				statement.close();
+			}
+			
+			closeConnection(connection);
+			return isSetup;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public User authenticate(String userName, String password) throws Exception {
