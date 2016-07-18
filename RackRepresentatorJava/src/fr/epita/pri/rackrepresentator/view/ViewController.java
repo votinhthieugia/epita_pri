@@ -19,7 +19,7 @@ public class ViewController implements IViewController {
 		views = new BaseView[ViewId.Total];
 	}
 	
-	private BaseView getView(int viewId) {
+	public BaseView getView(int viewId) {
 		if (views[viewId] != null) return views[viewId];
 		BaseView view = null;
 		switch (viewId) {
@@ -28,6 +28,7 @@ public class ViewController implements IViewController {
 		case ViewId.ManageUser: view = new ManageUserView("Rack Representator - Manage User", this); break;
 		case ViewId.Setting: view = new SettingView("Rack Representator - Setting", this); break;
 		case ViewId.About: view = new AboutView("Rack Representator - About Us", this); break;
+		case ViewId.OpenFile: view = new OpenFileView("Rack Representator - Open File", this); break;
 		default: break;
 		}
 		return view;

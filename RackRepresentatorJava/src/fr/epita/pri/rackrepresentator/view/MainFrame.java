@@ -36,13 +36,13 @@ public class MainFrame extends BaseFrame implements MouseListener {
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
 		dataLoader = new ExcelLoader();
-		drawableData = dataLoader.loadAll();
+//		drawableData = dataLoader.loadAll();
 		displayMore = new DisplayMore();
 		addMouseListener(this);
 	}
 
-	public void loadFromFile(String filePath) {
-		drawableData = dataLoader.loadAllFromFile(filePath);
+	public void loadFromFile(String filePath, String password) {
+		drawableData = dataLoader.loadAllFromFile(filePath, password);
 		repaint();
 	}
 

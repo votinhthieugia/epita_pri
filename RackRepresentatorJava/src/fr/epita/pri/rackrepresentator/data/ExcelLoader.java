@@ -1,11 +1,14 @@
 package fr.epita.pri.rackrepresentator.data;
 
+import java.io.File;
 import java.io.FileInputStream;
 
+import org.apache.poi.poifs.crypt.Decryptor;
+import org.apache.poi.poifs.crypt.EncryptionInfo;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import fr.epita.pri.rackrepresentator.main.Console;
@@ -36,9 +39,7 @@ public class ExcelLoader implements IDataLoader {
 	
 	@Override
 	public Drawable loadAll() {
-		
-//		return loadAllFromFile("C:\\Users\\Gustavo\\Downloads\\DatacentreRack.xlsx");
-		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx");
+		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx", null);
 	}
 
 	@Override
@@ -57,14 +58,25 @@ public class ExcelLoader implements IDataLoader {
 	}
 
 	@Override
-	public Drawable loadAllFromFile(String filePath) {
+	public Drawable loadAllFromFile(String filePath, String password) {
 		Console.info("Loading File: " + filePath + " ... ", false);
 		
 		DataSystem system = new DataSystem("IBM", "Data Centre Rack");
 		
 		try {
-			FileInputStream input = new FileInputStream(filePath);
-			Workbook workbook = new XSSFWorkbook(input);
+			XSSFWorkbook workbook = null;
+		
+			if (password != null) {
+				NPOIFSFileSystem fs = new NPOIFSFileSystem(new File(filePath), true);
+				EncryptionInfo encInfo = new EncryptionInfo(fs); 
+				Decryptor decryptor = Decryptor.getInstance(encInfo); 
+				decryptor.verifyPassword(password); 
+				workbook = new XSSFWorkbook(decryptor.getDataStream(fs));
+			} else {
+				FileInputStream input = new FileInputStream(filePath);
+				workbook = new XSSFWorkbook(input);
+			}
+			
 			Sheet sheet = workbook.getSheetAt(0);
 			int numRows = sheet.getLastRowNum() - sheet.getFirstRowNum();
 			for (int i = 1; i < numRows + 1; i++) {

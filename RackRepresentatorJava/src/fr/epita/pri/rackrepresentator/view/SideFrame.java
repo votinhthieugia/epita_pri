@@ -60,7 +60,7 @@ public class SideFrame extends BaseFrame implements ActionListener {
 		int response = fc.showOpenDialog(this);
 		if (response == JFileChooser.APPROVE_OPTION) {
 			MainFrame mainFrame = (MainFrame)manager.getFrame(FrameId.MAIN);
-			mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath());
+			mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath(), null);
 		}
 	}
 	

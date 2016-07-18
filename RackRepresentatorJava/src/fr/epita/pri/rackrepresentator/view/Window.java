@@ -77,6 +77,9 @@ public class Window extends BaseView implements ActionListener {
 		menuItem = new JMenuItem("Open");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
+		menuItem = new JMenuItem("Open Encrypt");
+		menuItem.addActionListener(this);
+		menu.add(menuItem);
 		menuBar.add(menu);
 		
 		if (SessionController.isAdminSession()) {
@@ -119,8 +122,11 @@ public class Window extends BaseView implements ActionListener {
 				int response = fc.showOpenDialog(this);
 				if (response == JFileChooser.APPROVE_OPTION) {
 					MainFrame mainFrame = (MainFrame)getFrame(FrameId.MAIN);
-					mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath());
+					mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath(), null);
 				}
+				break;
+			case "Open Encrypt":
+				controller.show(ViewId.OpenFile);
 				break;
 			case "Logout":
 				SessionController.destroy();
