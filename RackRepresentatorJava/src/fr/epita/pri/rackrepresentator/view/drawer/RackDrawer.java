@@ -8,6 +8,7 @@ import fr.epita.pri.rackrepresentator.models.Drawable;
 import fr.epita.pri.rackrepresentator.models.Rack;
 import fr.epita.pri.rackrepresentator.models.Server;
 import fr.epita.pri.rackrepresentator.view.drawer.primitives.Primitives;
+import fr.epita.pri.rackrepresentator.view.drawer.primitives.Ruler;
 
 public class RackDrawer implements IDrawer {
 
@@ -39,15 +40,33 @@ public class RackDrawer implements IDrawer {
 				//is blade server?
 				if(server.count() > 1){
 					
+					int y = rack.getY() + (RACK_ROWS-server.getLow())*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU());
+					int h = SERVER_UNIT_PIXELS*server.getNumU();
+					int padding_x = 20;
+					int padding_y = 10;
+					
+					Primitives.fillRectangle(g, rack.getX()- padding_x , y, padding_x, h - padding_y, Color.WHITE);
+					Primitives.fillRectangle(g, rack.getX() , y, rack.getWidth(), h, Color.LIGHT_GRAY);
+					Primitives.drawRectangle(g, rack.getX() , y, rack.getWidth(), h, Color.BLACK);
+					Ruler.draw(g, rack.getX(), y+h/2, rack.getX() + rack.getWidth(), y+h/2, false);
+					g.drawLine(rack.getX(), y+h/2, rack.getX() + rack.getWidth(), y+h/2);
+					
 					int j = 0;
 					while(server.hasNext()){
+						
 						Server innerServer = server.next();
 						innerServer.setWidth(BLADE_SERVER_WIDTH);
-						innerServer.setHeight(SERVER_UNIT_PIXELS*server.getNumU());
+						innerServer.setHeight(h/2);
+						innerServer.setX(rack.getX()+((j%RACK_COLUMNS)*BLADE_SERVER_WIDTH));
 						
-						innerServer.setY(rack.getY() + (RACK_ROWS-server.getLow())*SERVER_UNIT_PIXELS-(SERVER_UNIT_PIXELS*server.getNumU()));
-						innerServer.setX(rack.getX()+(j++*BLADE_SERVER_WIDTH));
+						if(j < 8){
+							innerServer.setY(y);
+						}else{
+							innerServer.setY(y+innerServer.getWidth());
+							
+						}
 						
+						j++;
 						serverDrawer.draw(g, innerServer);
 					}
 					

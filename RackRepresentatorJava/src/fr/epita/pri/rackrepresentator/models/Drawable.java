@@ -23,13 +23,14 @@ public abstract class Drawable {
 		children = new ArrayList<>();
 	}
 	
-	public void addSon(Drawable son) {
-		son.setParent(this);
-		children.add(son);
+	public void addChild(Drawable child) {
+		child.setParent(this);
+		children.add(child);
 	}
 
-	public void removeSon(Drawable son) {
-		children.remove(son);
+	public void removeChild(Drawable child) {
+		child.setParent(null);
+		children.remove(child);
 	}
 	
 
@@ -37,8 +38,8 @@ public abstract class Drawable {
 		return children;
 	}
 
-	public void setCenters(List<Drawable> sons) {
-		this.children = sons;
+	public void setChildren(List<Drawable> children) {
+		this.children = children;
 	}
 	
 	public void position(int x, int y, int width, int height) {

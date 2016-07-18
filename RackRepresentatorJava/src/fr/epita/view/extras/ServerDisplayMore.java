@@ -28,8 +28,11 @@ public class ServerDisplayMore implements IDisplayMore {
 			int xPosition = x + 5;
 			int yPosition = y + LINE_OFFSET;
 			yPosition = drawElement(g, xPosition, yPosition, "Server:" + server.getName());
-			yPosition = drawElement(g, xPosition, yPosition, "Rack:" + server.getParent().getName());
-			yPosition = drawElement(g, xPosition, yPosition, "Center:" + server.getParent().getParent().getName());
+			if(server.getParent() != null)
+			{
+				yPosition = drawElement(g, xPosition, yPosition, "Rack:" + server.getParent().getName());
+				yPosition = drawElement(g, xPosition, yPosition, "Center:" + server.getParent().getParent().getName());
+			}
 			yPosition = drawElement(g, xPosition, yPosition, "Serial:" + server.getSerialNumber());
 			yPosition = drawElement(g, xPosition, yPosition, "Description:" + server.getDescription());
 			yPosition = drawElement(g, xPosition, yPosition, "Model Brand:" + server.getModelBrand() + ", " + server.getModelNature());
