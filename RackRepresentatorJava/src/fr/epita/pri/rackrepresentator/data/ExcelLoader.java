@@ -39,6 +39,7 @@ public class ExcelLoader implements IDataLoader {
 	
 	@Override
 	public Drawable loadAll() {
+//		return loadAllFromFile("C:\\Users\\Gustavo\\Downloads\\DatacentreRack.xlsx", null);
 		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx", null);
 	}
 
@@ -125,12 +126,13 @@ public class ExcelLoader implements IDataLoader {
 					rack.addChild(server);
 				}
 			}
+			
+			Console.info("OK!", false);
 		} catch (Exception exception) {
 			exception.printStackTrace();
+			Console.info("ERROR!", false);
 			Console.error(exception.getMessage());
 		}
-		
-		Console.info("OK!");
 		
 		return system;
 	}

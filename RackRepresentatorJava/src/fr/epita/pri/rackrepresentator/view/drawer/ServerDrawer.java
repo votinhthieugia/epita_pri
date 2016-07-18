@@ -26,6 +26,7 @@ public class ServerDrawer implements IDrawer {
 		if (server.getWidth() == RackDrawer.BLADE_SERVER_WIDTH) {
 
 			Graphics2D g2 = (Graphics2D) g.create();
+//			g2.setFont(new Font("TimesRoman", Font.PLAIN, 10)); 
 			Primitives.drawTextRotate(g2, server.getX()+TEXT_PADDING_VERTICAL_X, server.getY() + server.getHeight(), -90, server.getName(),
 					Color.black);
 		} else
