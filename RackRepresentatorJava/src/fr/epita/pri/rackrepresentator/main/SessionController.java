@@ -8,20 +8,15 @@ import fr.epita.pri.rackrepresentator.models.User;
 
 public class SessionController {
 	private static User user;
-	private static boolean debug = true;
 	
 	public static void create(String name, String password) {
-		if (debug) {
-			user = new User(name, password, name.toLowerCase().equals("admin") ? User.Admin : User.Normal);
-		} else {
-			IEncryptor md5Encyptor = new MD5Encryptor();
-			IUserDao userDao = new UserDao(md5Encyptor);
-			try {
-				user = userDao.authenticate(name, password);
-			} catch (Exception ex) {
-				user = null;
-				ex.printStackTrace();
-			}
+		IEncryptor md5Encyptor = new MD5Encryptor();
+		IUserDao userDao = new UserDao(md5Encyptor);
+		try {
+			user = userDao.authenticate(name, password);
+		} catch (Exception ex) {
+			user = null;
+			ex.printStackTrace();
 		}
 	}
 	

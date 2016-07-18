@@ -26,9 +26,8 @@ public class ViewController implements IViewController {
 		case ViewId.Login: view = new LoginView("Rack Representator - Login", this); break;
 		case ViewId.Main: view = new Window("Rack Representator - Main", this); break;
 		case ViewId.ManageUser: view = new ManageUserView("Rack Representator - Manage User", this); break;
-		case ViewId.Setting: break;
-		case ViewId.Profile: break;
-		case ViewId.About: break;
+		case ViewId.Setting: view = new SettingView("Rack Representator - Setting", this); break;
+		case ViewId.About: view = new AboutView("Rack Representator - About Us", this); break;
 		default: break;
 		}
 		return view;
