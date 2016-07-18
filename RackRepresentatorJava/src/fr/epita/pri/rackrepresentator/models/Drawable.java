@@ -12,7 +12,7 @@ public abstract class Drawable {
 	protected int width;
 	protected int height;
 	protected boolean shouldDraw;
-	protected boolean shouldDrawChildren;
+	protected boolean shouldDrawChildren;	
 	protected List<Drawable> children;
 	
 	public Drawable(String name, String description) {
@@ -144,7 +144,7 @@ public abstract class Drawable {
 			Drawable d = children.get(i);
 			
 			found = d.findDrawableWithPosition(x, y);
-			if (found != null) {
+			if (found != null && found.shouldDraw) {
 				break;
 			}
 			found = null;

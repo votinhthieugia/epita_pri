@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
+import fr.epita.pri.rackrepresentator.main.SessionController;
+
 public class TopFrame extends BaseFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JButton btnLoad;
@@ -20,7 +22,8 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		super(manager);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
-		JLabel label = new JLabel("Admin");
+		JLabel label = new JLabel(SessionController.getUser().getName());
+		
 		add(label);		
 		
 		add(new JLabel(" "));
