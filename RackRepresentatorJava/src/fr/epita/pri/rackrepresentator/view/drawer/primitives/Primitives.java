@@ -20,7 +20,7 @@ public class Primitives {
 	public static void drawRectangleWithRuler(Graphics g, int x, int y, int width, int height) {
 		Graphics2D g2d = (Graphics2D)g.create();
 		g2d.drawRect(x, y, width, height);
-		Ruler.draw(g2d, x, y, x, height+y);
+		Ruler.draw(g2d, x, y, x, height+y, true);
 //		Ruler.draw(g2d, x, y+height, x+width, y+height);
 	}
 	

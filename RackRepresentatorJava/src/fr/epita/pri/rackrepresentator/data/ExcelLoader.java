@@ -87,7 +87,7 @@ public class ExcelLoader implements IDataLoader {
 				
 				if (dc == null) {
 					dc = new DataCenter(dcName, dcName, system.getChildren().size());
-					system.addSon(dc);
+					system.addChild(dc);
 				}
 				
 				String rackName = row.getCell(ColumnName.Rack.ordinal()).getStringCellValue();
@@ -95,7 +95,7 @@ public class ExcelLoader implements IDataLoader {
 				
 				if (rack == null) {
 					rack = new Rack(rackName, rackName, dc.getIndex(), dc.getChildren().size());
-					dc.addSon(rack);
+					dc.addChild(rack);
 				}
 				
 				Server server = new Server(row.getCell(ColumnName.CiName.ordinal()).getStringCellValue(), 
@@ -122,7 +122,7 @@ public class ExcelLoader implements IDataLoader {
 					server.setNext(bladeServer.getNext());
 					bladeServer.setNext(server);
 				} else {
-					rack.addSon(server);
+					rack.addChild(server);
 				}
 			}
 		} catch (Exception exception) {

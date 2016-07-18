@@ -11,7 +11,7 @@ public class Ruler {
 	private static final int  TICK_SIZE = 3;
 	private static final int  STRING_PADDING = 19;
 
-	public static void draw(Graphics g, int x1, int y1, int x2, int y2) {
+	public static void draw(Graphics g, int x1, int y1, int x2, int y2, boolean writeNumbers) {
 
 		Graphics2D g2d = (Graphics2D) g.create();
 
@@ -23,7 +23,8 @@ public class Ruler {
 		{
 			for (int i = y1 + TICK_DIST, pos = (int) (len /TICK_DIST); i <= len + y1; i += TICK_DIST, pos--){
 				g2d.drawLine(x1 - TICK_SIZE, i, x2 + TICK_SIZE, i);
-				g2d.drawString("" + pos, x1 - STRING_PADDING, i);
+				if(writeNumbers)
+					g2d.drawString("" + pos, x1 - STRING_PADDING, i);
 			}
 		}else
 		{
