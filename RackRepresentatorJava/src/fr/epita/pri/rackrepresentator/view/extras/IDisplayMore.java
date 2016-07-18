@@ -1,4 +1,4 @@
-package fr.epita.view.extras;
+package fr.epita.pri.rackrepresentator.view.extras;
 
 import java.awt.Graphics;
 

@@ -251,4 +251,8 @@ public class Server extends Drawable implements Iterator<Server> {
 	public boolean hasChildrenToShow() {
 		return false;
 	}
+
+	@Override
+	public void remove() {
+	}
 }

@@ -9,7 +9,7 @@ import fr.epita.pri.rackrepresentator.models.Server;
 import fr.epita.pri.rackrepresentator.models.ServerProp;
 import fr.epita.pri.rackrepresentator.models.ServerState;
 import fr.epita.pri.rackrepresentator.view.drawer.primitives.Primitives;
-import fr.epita.view.extras.Utils;
+import fr.epita.pri.rackrepresentator.view.extras.Utils;
 
 public class ServerDrawer implements IDrawer {
 

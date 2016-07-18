@@ -14,7 +14,7 @@ import fr.epita.pri.rackrepresentator.data.IDataLoader;
 import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.models.Drawable;
 import fr.epita.pri.rackrepresentator.view.drawer.Drawer;
-import fr.epita.view.extras.DisplayMore;
+import fr.epita.pri.rackrepresentator.view.extras.DisplayMore;
 
 public class MainFrame extends BaseFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;

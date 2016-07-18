@@ -28,23 +28,23 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		
 		add(new JLabel(" "));
 		
-		btnSettings = new JButton("Settings");
-		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnSettings.addActionListener(this);
-		add(btnSettings);
-		
-		add(new JLabel(" "));
-				
-		JButton btnBlaBlaBla = new JButton("Profile");
-		btnBlaBlaBla.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(btnBlaBlaBla);
-
-		add(new JLabel(" "));
-		
-		btnLoad = new JButton("Load");
-		btnLoad.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnLoad.addActionListener(this);
-		add(btnLoad);
+//		btnSettings = new JButton("Settings");
+//		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		btnSettings.addActionListener(this);
+//		add(btnSettings);
+//		
+//		add(new JLabel(" "));
+//				
+//		JButton btnBlaBlaBla = new JButton("Profile");
+//		btnBlaBlaBla.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		add(btnBlaBlaBla);
+//
+//		add(new JLabel(" "));
+//		
+//		btnLoad = new JButton("Load");
+//		btnLoad.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		btnLoad.addActionListener(this);
+//		add(btnLoad);
 		
 		add(new JLabel(" "));
 		JButton btnExport = new JButton("Export");
