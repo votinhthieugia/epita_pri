@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class OpenFileView extends BaseView implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -72,6 +73,8 @@ public class OpenFileView extends BaseView implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonBrowse) {
 			final JFileChooser fc = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel spreadsheets", "xls", "xlsx");
+			fc.setFileFilter(filter);
 			int response = fc.showOpenDialog(this);
 			if (response == JFileChooser.APPROVE_OPTION) {
 				filePath = fc.getSelectedFile().getAbsolutePath();

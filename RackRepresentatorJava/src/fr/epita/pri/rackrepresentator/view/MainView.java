@@ -12,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.main.SessionController;
@@ -129,6 +130,8 @@ public class MainView extends BaseView implements ActionListener {
 				break;
 			case "Open":
 				final JFileChooser fc = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel spreadsheets", "xls", "xlsx");
+				fc.setFileFilter(filter);
 				int response = fc.showOpenDialog(this);
 				if (response == JFileChooser.APPROVE_OPTION) {
 					mainFrame = (MainFrame)getFrame(FrameId.MAIN);

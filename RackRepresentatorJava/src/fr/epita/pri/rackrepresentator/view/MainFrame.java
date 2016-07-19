@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -96,7 +95,7 @@ public class MainFrame extends BaseFrame implements MouseListener {
 			paint2(g);
 			JFileChooser chooser = new JFileChooser();
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
+			
 			if (chooser.showOpenDialog(this.getParent()) == 0) {
 
 				File file = new File(chooser.getSelectedFile().getPath());

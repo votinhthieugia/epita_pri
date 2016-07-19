@@ -38,7 +38,7 @@ public class ExcelLoader {
 	};
 	
 	public Drawable loadAllFromFile(String filePath, String password) {
-		Console.info("Loading File: " + filePath + " ... ", false);
+		Console.info("Loading File: " + filePath + " ... ");
 		
 		DataSystem system = new DataSystem("IBM", "Data Centre Rack");
 		
