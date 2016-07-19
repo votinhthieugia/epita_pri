@@ -24,7 +24,7 @@ public class ViewController implements IViewController {
 		BaseView view = null;
 		switch (viewId) {
 		case ViewId.Login: view = new LoginView("Rack Representator - Login", this); break;
-		case ViewId.Main: view = new Window("Rack Representator - Main", this); break;
+		case ViewId.Main: view = new MainView("Rack Representator - Main", this); break;
 		case ViewId.ManageUser: view = new ManageUserView("Rack Representator - Manage User", this); break;
 		case ViewId.Setting: view = new SettingView("Rack Representator - Setting", this); break;
 		case ViewId.About: view = new AboutView("Rack Representator - About Us", this); break;

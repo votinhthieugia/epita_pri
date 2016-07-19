@@ -19,7 +19,7 @@ public class TopFrame extends BaseFrame implements ActionListener {
 	private JButton btnBack;
 	private JButton btnExport; 
 	
-	public TopFrame(Window manager) {
+	public TopFrame(MainView manager) {
 		super(manager);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		

@@ -30,7 +30,7 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	private DisplayMore displayMore;
 	private Drawable actualView;
 
-	public MainFrame(Window manager) {
+	public MainFrame(MainView manager) {
 		super(manager);
 		setSize(2000, 2000);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

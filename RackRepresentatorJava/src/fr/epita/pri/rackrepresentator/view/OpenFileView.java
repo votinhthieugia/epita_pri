@@ -79,7 +79,7 @@ public class OpenFileView extends BaseView implements ActionListener {
 			}
 		} else if (e.getSource() == buttonOpen) {
 			controller.hide(viewId);
-			Window mainView = (Window)((ViewController)controller).getView(ViewId.Main);
+			MainView mainView = (MainView)((ViewController)controller).getView(ViewId.Main);
 			MainFrame mainFrame = (MainFrame)mainView.getFrame(FrameId.MAIN);
 			mainFrame.loadFromFile(filePath, String.copyValueOf(passwordTextField.getPassword()));
 		} else if (e.getSource() == buttonCancel) {

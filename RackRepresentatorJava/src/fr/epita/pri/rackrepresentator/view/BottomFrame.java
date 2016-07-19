@@ -16,7 +16,7 @@ public class BottomFrame extends BaseFrame {
 		return txtAreaConsole;
 	}
 
-	public BottomFrame(Window manager) {
+	public BottomFrame(MainView manager) {
 		super(manager);
 		setLayout(new BorderLayout(0, 0));
 		txtAreaConsole.setEditable(false);

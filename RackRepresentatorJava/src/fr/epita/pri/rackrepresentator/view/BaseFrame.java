@@ -5,17 +5,17 @@ import javax.swing.JComponent;
 public abstract class BaseFrame extends JComponent {
 	private static final long serialVersionUID = 1L;
 	
-	protected Window manager;
+	protected MainView manager;
 	
-	public BaseFrame(Window manager) {
+	public BaseFrame(MainView manager) {
 		this.manager = manager;
 	}
 
-	public Window getManager() {
+	public MainView getManager() {
 		return manager;
 	}
 
-	public void setManager(Window manager) {
+	public void setManager(MainView manager) {
 		this.manager = manager;
 	}
 }

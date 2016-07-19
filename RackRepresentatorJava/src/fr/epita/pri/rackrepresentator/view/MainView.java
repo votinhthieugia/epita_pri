@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.main.SessionController;
 
-public class Window extends BaseView implements ActionListener {
+public class MainView extends BaseView implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private BaseFrame[] frames;
@@ -24,7 +24,7 @@ public class Window extends BaseView implements ActionListener {
 	private JMenu menu;
 	private JMenuItem menuItem;
 
-	public Window(String name, IViewController controller) {
+	public MainView(String name, IViewController controller) {
 		super(name, controller);
 		setViewId(ViewId.Main);
 		
