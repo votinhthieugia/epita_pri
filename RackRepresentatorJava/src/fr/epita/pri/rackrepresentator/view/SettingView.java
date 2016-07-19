@@ -40,7 +40,7 @@ public class SettingView extends BaseView implements ActionListener {
 		fieldComboBox.setBounds(180, 60, 120, 20);
 		for (int i = 2; i <= 5; i++) {
 			fieldComboBox.addItem(i);
-			if (Setting.getNumDisplayedRacks() == i) {
+			if (Setting.Instance().getNumDisplayedRacks() == i) {
 				fieldComboBox.setSelectedIndex(i - 2);
 			}
 		}
@@ -52,7 +52,7 @@ public class SettingView extends BaseView implements ActionListener {
 		lblTitle.setBounds(40, 60, 150, 100);
 		contentPane.add(lblTitle);
 		
-		timeTextField = new JTextField(String.valueOf(Setting.getReloadTime()));
+		timeTextField = new JTextField(String.valueOf(Setting.Instance().getReloadTime()));
 		timeTextField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		timeTextField.setBounds(180, 100, 50, 20);
 		contentPane.add(timeTextField);
@@ -75,8 +75,12 @@ public class SettingView extends BaseView implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonAccept) {
-			Setting.setNumDisplayedRacks(Integer.valueOf(fieldComboBox.getSelectedItem().toString()));
-			Setting.setReloadTime(Integer.valueOf(timeTextField.getText()));
+			Setting.Instance().setNumDisplayedRacks(Integer.valueOf(fieldComboBox.getSelectedItem().toString()));
+			Setting.Instance().setReloadTime(Integer.valueOf(timeTextField.getText()));
+			Setting.Instance().save();
+			MainView mainView = (MainView)controller.getView(ViewId.Main);
+			MainFrame mainFrame = (MainFrame)mainView.getFrame(FrameId.MAIN);
+			mainFrame.setTimer();
 		} else if (e.getSource() == buttonCancel) {
 			controller.hide(viewId);
 		}

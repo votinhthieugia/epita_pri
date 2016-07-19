@@ -25,12 +25,15 @@ public class DatabaseLoader {
 	public Drawable loadAll() {
 		DataSystem system = new DataSystem("IBM", "Data Centre Rack");
 		try {
-			List<DataCenter> centers = dcDao.getAll();
-			for (DataCenter center : centers) {
-				List<Rack> racks = rackDao.findByCenterId(center.getIndex());
-				for (Rack rack : racks) {
-					List<Server> servers = serverDao.findByRackId(rack.getIndex());
-					for (Server server : servers) {
+			List<Drawable> centers = dcDao.getAll();
+			for (Drawable aCenter : centers) {
+				DataCenter center = (DataCenter)aCenter; 
+				List<Drawable> racks = rackDao.findByCenterId(center.getIndex());
+				for (Drawable aRack : racks) {
+					Rack rack = (Rack)aRack;
+					List<Drawable> servers = serverDao.findByRackId(rack.getIndex());
+					for (Drawable aServer : servers) {
+						Server server = (Server)aServer;
 						Server bladeServer = rack.findByLowHigh(server.getLow(), server.getHigh());
 						if (bladeServer != null) {
 							server.setNext(bladeServer.getNext());

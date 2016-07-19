@@ -3,25 +3,26 @@ package fr.epita.pri.rackrepresentator.models;
 import java.util.Iterator;
 
 public class Server extends Drawable implements Iterator<Server> {
-	private ServerState state;
-	private ServerProp prop;
-	private ServerScope scope;
-	private int rackIndex;
-	private int index;
-	private int low;
-	private int high;
-	private int startsAt;
-	private int numU;
-	private int criticality;
-	private String modelBrand;
-	private String modelNature;
-	private String category;
-	private String model;
-	private String xReference;
-	private String serialNumber;
-	private Server next;
-	private Server iterator;
+	protected ServerState state;
+	protected ServerProp prop;
+	protected ServerScope scope;
+	protected int rackIndex;
+	protected int low;
+	protected int high;
+	protected int startsAt;
+	protected int numU;
+	protected int criticality;
+	protected String modelBrand;
+	protected String modelNature;
+	protected String category;
+	protected String model;
+	protected String xReference;
+	protected String serialNumber;
+	protected Server next;
+	protected Server iterator;
 
+	public Server() {}
+	
 	public Server(String name, String description, int rackIndex, int index) {
 		super(name, description);
 		this.rackIndex = rackIndex;
@@ -48,14 +49,6 @@ public class Server extends Drawable implements Iterator<Server> {
 		this.state = new ServerState(state);
 		this.prop = new ServerProp(prop);
 		this.iterator = this;
-	}
-
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
 	}
 
 	public String getName() {

@@ -1,7 +1,7 @@
 package fr.epita.pri.rackrepresentator.models;
 
 public class DataCenter extends Drawable {
-	private int index;
+	public DataCenter() {}
 	
 	public DataCenter(String name, String description, int index) {
 		super(name, description);
@@ -9,14 +9,6 @@ public class DataCenter extends Drawable {
 
 		//as it is SO FAR the first to appear...
 		shouldDrawChildren = false;
-	}
-	
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
 	}
 	
 	@Override

@@ -7,5 +7,6 @@ public class ViewId {
 	public static final int ManageUser = 3;
 	public static final int About = 4;
 	public static final int OpenFile = 5;
-	public static final int Total = 6;
+	public static final int ManageDrawable = 6;
+	public static final int Total = 7;
 }

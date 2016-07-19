@@ -1,14 +1,17 @@
 package fr.epita.pri.rackrepresentator.view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import fr.epita.pri.rackrepresentator.main.SessionController;
 
@@ -17,7 +20,8 @@ public class TopFrame extends BaseFrame implements ActionListener {
 	private JButton btnLoad;
 	private JButton btnSettings;
 	private JButton btnBack;
-	private JButton btnExport; 
+	private JButton btnExport;
+	private JLabel lblUpdateTime;
 	
 	public TopFrame(MainView manager) {
 		super(manager);
@@ -39,6 +43,14 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		btnBack.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnBack.addActionListener(this);
 		add(btnBack);
+		
+		lblUpdateTime = new JLabel("Updated at");
+		add(lblUpdateTime);
+		updateTime();
+	}
+	
+	public void updateTime() {
+		lblUpdateTime.setText("Updated at:" + new Date().toString());
 	}
 
 	void onLoadBtnClicked() {

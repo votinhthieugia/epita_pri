@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.epita.pri.rackrepresentator.models.Drawable;
 import fr.epita.pri.rackrepresentator.models.Server;
 
 public class ServerDao extends SqlDao {
-	public List<Server> getAll() {
-		List<Server> servers = new ArrayList<Server>();
+	public List<Drawable> getAll() {
+		List<Drawable> servers = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
@@ -56,18 +57,18 @@ public class ServerDao extends SqlDao {
 		return server;
 	}
 	
-	public List<Server> findByName(String name) {
-		List<Server> servers = new ArrayList<Server>();
+	public List<Drawable> findByName(String name) {
+		List<Drawable> servers = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
 			connection = getConnection();
 			
 			if (connection != null) {
-				String query = "select * from servers where name = ?";
+				String query = "select * from servers where name like ?";
 				
 				try (PreparedStatement statement = connection.prepareStatement(query)) {
-					statement.setString(1, name);
+					statement.setString(1, "%" + name + "%");
 					ResultSet resultSet = statement.executeQuery();
 					
 					while (resultSet.next()) {
@@ -86,8 +87,8 @@ public class ServerDao extends SqlDao {
 		return servers;
 	}
 	
-	public List<Server> findByRackId(int rackId) {
-		List<Server> servers = new ArrayList<Server>();
+	public List<Drawable> findByRackId(int rackId) {
+		List<Drawable> servers = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
@@ -117,7 +118,7 @@ public class ServerDao extends SqlDao {
 		return servers;
 	}
 	
-	public Server findById(int id) {
+	public Drawable findById(int id) {
 		Server server = null;
 		Connection connection = null;
 		
@@ -241,6 +242,28 @@ public class ServerDao extends SqlDao {
 				
 				try (PreparedStatement statement = connection.prepareStatement(query)) {
 					statement.setInt(1, server.getIndex());
+					statement.execute();
+					statement.close();
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (connection != null) closeConnection(connection);
+		}
+	}
+	
+	public void deleteByRackId(int rackId) {
+		Connection connection = null;
+		
+		try {
+			connection = getConnection();
+			
+			if (connection != null) {
+				String query = "delete from servers where rack_id = ?";
+				
+				try (PreparedStatement statement = connection.prepareStatement(query)) {
+					statement.setInt(1, rackId);
 					statement.execute();
 					statement.close();
 				}

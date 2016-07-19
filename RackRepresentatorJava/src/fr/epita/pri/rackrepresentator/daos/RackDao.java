@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.epita.pri.rackrepresentator.models.Drawable;
 import fr.epita.pri.rackrepresentator.models.Rack;
 
 public class RackDao extends SqlDao {
-	public List<Rack> getAll() {
-		List<Rack> racks = new ArrayList<Rack>();
+	public List<Drawable> getAll() {
+		List<Drawable> racks = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
@@ -46,18 +47,18 @@ public class RackDao extends SqlDao {
 						resultSet.getInt("id"));
 	}
 	
-	public List<Rack> findByName(String name) {
-		List<Rack> racks = new ArrayList<Rack>();
+	public List<Drawable> findByName(String name) {
+		List<Drawable> racks = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
 			connection = getConnection();
 			
 			if (connection != null) {
-				String query = "select * from racks where name = ?";
+				String query = "select * from racks where name like ?";
 				
 				try (PreparedStatement statement = connection.prepareStatement(query)) {
-					statement.setString(1, name);
+					statement.setString(1, "%" + name + "%");
 					ResultSet resultSet = statement.executeQuery();
 					
 					while (resultSet.next()) {
@@ -77,7 +78,7 @@ public class RackDao extends SqlDao {
 		return racks;
 	}
 	
-	public Rack findById(int id) {
+	public Drawable findById(int id) {
 		Rack rack = null;
 		Connection connection = null;
 		
@@ -108,8 +109,8 @@ public class RackDao extends SqlDao {
 		return rack;
 	}
 	
-	public List<Rack> findByCenterId(int centerId) {
-		List<Rack> racks = new ArrayList<Rack>();
+	public List<Drawable> findByCenterId(int centerId) {
+		List<Drawable> racks = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
@@ -209,6 +210,29 @@ public class RackDao extends SqlDao {
 				try (PreparedStatement statement = connection.prepareStatement(query)) {
 					int index = 1;
 					statement.setInt(index++, rack.getIndex());
+					statement.execute();
+					statement.close();
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (connection != null) closeConnection(connection);
+		}
+	}
+	
+	public void deleteByCenterId(int centerId) {
+		Connection connection = null;
+		
+		try {
+			connection = getConnection();
+			
+			if (connection != null) {
+				String query = "delete from racks where center_id = ?";
+				
+				try (PreparedStatement statement = connection.prepareStatement(query)) {
+					int index = 1;
+					statement.setInt(index++, centerId);
 					statement.execute();
 					statement.close();
 				}

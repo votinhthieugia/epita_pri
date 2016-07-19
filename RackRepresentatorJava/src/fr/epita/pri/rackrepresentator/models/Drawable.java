@@ -5,6 +5,7 @@ import java.util.List;
 
 public abstract class Drawable {
 	protected Drawable parent;
+	protected int index;
 	protected String name;
 	protected String description;
 	protected int x;
@@ -14,6 +15,8 @@ public abstract class Drawable {
 	protected boolean shouldDraw;
 	protected boolean shouldDrawChildren;	
 	protected List<Drawable> children;
+	
+	public Drawable() {}
 	
 	public Drawable(String name, String description) {
 		this.name = name;
@@ -155,6 +158,14 @@ public abstract class Drawable {
 			found = this;
 		
 		return found;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 	
 	public abstract boolean hasChildrenToShow();

@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.epita.pri.rackrepresentator.models.DataCenter;
+import fr.epita.pri.rackrepresentator.models.Drawable;
 
 public class DataCenterDao extends SqlDao {
-	public List<DataCenter> getAll() {
-		List<DataCenter> centers = new ArrayList<DataCenter>();
+	public List<Drawable> getAll() {
+		List<Drawable> centers = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
@@ -43,18 +44,18 @@ public class DataCenterDao extends SqlDao {
 		return new DataCenter(resultSet.getString("name"), resultSet.getString("description"), resultSet.getInt("id"));
 	}
 	
-	public List<DataCenter> findByName(String name) {
-		List<DataCenter> centers = new ArrayList<DataCenter>();
+	public List<Drawable> findByName(String name) {
+		List<Drawable> centers = new ArrayList<Drawable>();
 		Connection connection = null;
 		
 		try {
 			connection = getConnection();
 			
 			if (connection != null) {
-				String query = "select * from centers where name = ?";
+				String query = "select * from centers where name like ?";
 				
 				try (PreparedStatement statement = connection.prepareStatement(query)) {
-					statement.setString(1, name);
+					statement.setString(1, "%" + name + "%");
 					ResultSet resultSet = statement.executeQuery();
 					
 					while (resultSet.next()) {

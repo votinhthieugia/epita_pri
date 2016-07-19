@@ -1,8 +1,9 @@
 package fr.epita.pri.rackrepresentator.models;
 
 public class Rack extends Drawable {
-	private int index;
-	private int dataCenterIndex;
+	protected int dataCenterIndex;
+	
+	public Rack() {}
 	
 	public Rack(String name, String description, int dataCenterIndex, int index) {
 		super(name, description);
@@ -61,14 +62,6 @@ public class Rack extends Drawable {
 		this.dataCenterIndex = dataCenterIndex;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-	
 	public int getNumServers() {
 		int count = 0;
 		for (Drawable s : children) count += ((Server) s).count();

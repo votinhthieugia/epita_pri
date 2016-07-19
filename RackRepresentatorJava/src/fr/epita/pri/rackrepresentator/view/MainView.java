@@ -90,6 +90,9 @@ public class MainView extends BaseView implements ActionListener {
 			menuItem = new JMenuItem("User");
 			menuItem.addActionListener(this);
 			menu.add(menuItem);
+			menuItem = new JMenuItem("System");
+			menuItem.addActionListener(this);
+			menu.add(menuItem);
 			menuBar.add(menu);
 		}
 		
@@ -122,7 +125,7 @@ public class MainView extends BaseView implements ActionListener {
 				break;
 			case "Load From DB":
 				MainFrame mainFrame = (MainFrame)getFrame(FrameId.MAIN);
-				mainFrame.loadFromDB();
+				mainFrame.loadFromDB(true);
 				break;
 			case "Open":
 				final JFileChooser fc = new JFileChooser();
@@ -141,6 +144,9 @@ public class MainView extends BaseView implements ActionListener {
 				break;
 			case "User":
 				controller.show(ViewId.ManageUser);
+				break;
+			case "System":
+				controller.show(ViewId.ManageDrawable);
 				break;
 			default:
 				break;
