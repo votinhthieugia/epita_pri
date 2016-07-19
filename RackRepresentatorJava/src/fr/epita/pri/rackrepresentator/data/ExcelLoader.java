@@ -104,12 +104,13 @@ public class ExcelLoader {
 					rack.addChild(server);
 				}
 			}
+			
+			Console.info("OK!", false);
 		} catch (Exception exception) {
 			exception.printStackTrace();
+			Console.info("ERROR!", false);
 			Console.error(exception.getMessage());
 		}
-		
-		Console.info("OK!");
 		
 		return system;
 	}

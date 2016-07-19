@@ -30,7 +30,6 @@ public class DatabaseLoader {
 				List<Rack> racks = rackDao.findByCenterId(center.getIndex());
 				for (Rack rack : racks) {
 					List<Server> servers = serverDao.findByRackId(rack.getIndex());
-					System.out.println(rack.getName() + " " + servers.size());
 					for (Server server : servers) {
 						Server bladeServer = rack.findByLowHigh(server.getLow(), server.getHigh());
 						if (bladeServer != null) {

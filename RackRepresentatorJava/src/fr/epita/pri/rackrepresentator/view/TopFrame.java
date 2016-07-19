@@ -17,6 +17,7 @@ public class TopFrame extends BaseFrame implements ActionListener {
 	private JButton btnLoad;
 	private JButton btnSettings;
 	private JButton btnBack;
+	private JButton btnExport; 
 	
 	public TopFrame(Window manager) {
 		super(manager);
@@ -28,27 +29,9 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		
 		add(new JLabel(" "));
 		
-//		btnSettings = new JButton("Settings");
-//		btnSettings.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		btnSettings.addActionListener(this);
-//		add(btnSettings);
-//		
-//		add(new JLabel(" "));
-//				
-//		JButton btnBlaBlaBla = new JButton("Profile");
-//		btnBlaBlaBla.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		add(btnBlaBlaBla);
-//
-//		add(new JLabel(" "));
-//		
-//		btnLoad = new JButton("Load");
-//		btnLoad.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		btnLoad.addActionListener(this);
-//		add(btnLoad);
-		
-		add(new JLabel(" "));
-		JButton btnExport = new JButton("Export");
+		btnExport = new JButton("Export");
 		btnExport.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnExport.addActionListener(this);
 		add(btnExport);
 		
 		add(new JLabel(" "));
@@ -72,6 +55,11 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		mainFrame.back();
 	}
 	
+	void onExportBtnClicked() {
+		MainFrame mainFrame = (MainFrame)manager.getFrame(FrameId.MAIN);
+		mainFrame.export();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLoad) {
@@ -79,6 +67,8 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		} else if (e.getSource() == btnSettings) {
 		}else if (e.getSource() == btnBack) {
 			onBackBtnClicked();
+		}else if (e.getSource() == btnExport) {
+			onExportBtnClicked();
 		}
 	}
 	

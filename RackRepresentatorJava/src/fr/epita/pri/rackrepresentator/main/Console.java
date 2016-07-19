@@ -19,8 +19,9 @@ public class Console {
 	}
 	
 	public static void info(String str, boolean skipLine){
-		txtArea.append(str);
 		if(skipLine)
 			txtArea.append("\n");
+		
+		txtArea.append(str);
 	}
 }
