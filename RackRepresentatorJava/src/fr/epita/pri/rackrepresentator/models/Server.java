@@ -22,8 +22,9 @@ public class Server extends Drawable implements Iterator<Server> {
 	private Server next;
 	private Server iterator;
 
-	public Server(String name, String description, int index) {
+	public Server(String name, String description, int rackIndex, int index) {
 		super(name, description);
+		this.rackIndex = rackIndex;
 		this.index = index;
 		this.iterator = this;
 		this.prop = new ServerProp();
@@ -40,10 +41,10 @@ public class Server extends Drawable implements Iterator<Server> {
 		this.iterator = this;
 	}
 
-	public Server(String name, String description, int index, int roomIndex, int state, int prop, int scope) {
+	public Server(String name, String description, int index, int rackIndex, int state, int prop, int scope) {
 		super(name, description);
 		this.index = index;
-		this.rackIndex = roomIndex;
+		this.rackIndex = rackIndex;
 		this.state = new ServerState(state);
 		this.prop = new ServerProp(prop);
 		this.iterator = this;

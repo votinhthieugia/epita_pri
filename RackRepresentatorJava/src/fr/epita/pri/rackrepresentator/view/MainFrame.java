@@ -9,7 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import fr.epita.pri.rackrepresentator.data.ExcelLoader;
+import fr.epita.pri.rackrepresentator.data.DataLoader;
 import fr.epita.pri.rackrepresentator.data.IDataLoader;
 import fr.epita.pri.rackrepresentator.main.Console;
 import fr.epita.pri.rackrepresentator.models.Drawable;
@@ -35,14 +35,19 @@ public class MainFrame extends BaseFrame implements MouseListener {
 		/////////
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-		dataLoader = new ExcelLoader();
-//		drawableData = dataLoader.loadAll();
+		dataLoader = DataLoader.Instance();
+		loadFromDB();
 		displayMore = new DisplayMore();
 		addMouseListener(this);
 	}
+	
+	public void loadFromDB() {
+		drawableData = dataLoader.loadFromDb();
+		repaint();
+	}
 
 	public void loadFromFile(String filePath, String password) {
-		drawableData = dataLoader.loadAllFromFile(filePath, password);
+		drawableData = dataLoader.loadFromFile(filePath, password);
 		repaint();
 	}
 

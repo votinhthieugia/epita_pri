@@ -74,6 +74,9 @@ public class Window extends BaseView implements ActionListener {
 		menuBar.add(menu);
 		
 		menu = new JMenu("File");
+		menuItem = new JMenuItem("Load From DB");
+		menuItem.addActionListener(this);
+		menu.add(menuItem);
 		menuItem = new JMenuItem("Open");
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
@@ -117,11 +120,15 @@ public class Window extends BaseView implements ActionListener {
 			case "Setting":
 				controller.show(ViewId.Setting);
 				break;
+			case "Load From DB":
+				MainFrame mainFrame = (MainFrame)getFrame(FrameId.MAIN);
+				mainFrame.loadFromDB();
+				break;
 			case "Open":
 				final JFileChooser fc = new JFileChooser();
 				int response = fc.showOpenDialog(this);
 				if (response == JFileChooser.APPROVE_OPTION) {
-					MainFrame mainFrame = (MainFrame)getFrame(FrameId.MAIN);
+					mainFrame = (MainFrame)getFrame(FrameId.MAIN);
 					mainFrame.loadFromFile(fc.getSelectedFile().getAbsolutePath(), null);
 				}
 				break;

@@ -18,7 +18,7 @@ import fr.epita.pri.rackrepresentator.models.Drawable;
 import fr.epita.pri.rackrepresentator.models.Rack;
 import fr.epita.pri.rackrepresentator.models.Server;
 
-public class ExcelLoader implements IDataLoader {
+public class ExcelLoader {
 	enum ColumnName {
 		DataCenterName,
 		Rack,
@@ -37,27 +37,6 @@ public class ExcelLoader implements IDataLoader {
 		SerialNumber
 	};
 	
-	@Override
-	public Drawable loadAll() {
-		return loadAllFromFile("/Users/hoanganhdoan/Documents/workspace/epita_pri/RackRepresentatorJava/resources/DatacentreRack.xlsx", null);
-	}
-
-	@Override
-	public Drawable loadDataCenter(int index) {
-		return null;
-	}
-
-	@Override
-	public Drawable loadRack(int index) {
-		return null;
-	}
-
-	@Override
-	public Drawable loadServer(int index) {
-		return null;
-	}
-
-	@Override
 	public Drawable loadAllFromFile(String filePath, String password) {
 		Console.info("Loading File: " + filePath + " ... ", false);
 		
@@ -100,7 +79,7 @@ public class ExcelLoader implements IDataLoader {
 				
 				Server server = new Server(row.getCell(ColumnName.CiName.ordinal()).getStringCellValue(), 
 											row.getCell(ColumnName.CiDescription.ordinal()).getStringCellValue(), 
-											rack.getChildren().size());
+											rack.getIndex(), rack.getChildren().size());
 				server.setLow((int)row.getCell(ColumnName.Low.ordinal()).getNumericCellValue());
 				server.setHigh((int)row.getCell(ColumnName.High.ordinal()).getNumericCellValue());
 				server.setStartsAt((int)row.getCell(ColumnName.StartsAt.ordinal()).getNumericCellValue());
