@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -52,7 +53,7 @@ public class MainFrame extends BaseFrame implements MouseListener {
 	}
 
 	public void loadFromFile(String filePath, String password) {
-		drawableData = dataLoader.loadFromFile(filePath, password);
+		actualView = drawableData = dataLoader.loadFromFile(filePath, password);
 		repaint();
 	}
 
@@ -74,6 +75,7 @@ public class MainFrame extends BaseFrame implements MouseListener {
 		}
 	}
 
+	//TODO move method to proper place.
 	public void export() {
 		BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.createGraphics();
@@ -83,18 +85,18 @@ public class MainFrame extends BaseFrame implements MouseListener {
 			JFileChooser chooser = new JFileChooser();
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			//TODO verify permission to write and actualView = null;
 			if (chooser.showOpenDialog(this.getParent()) == 0) {
 
 				File file = new File(chooser.getSelectedFile().getPath());
-				if (file.canWrite()) {
+				
+				if (Files.isWritable(file.toPath())) {
 					String path = chooser.getSelectedFile().getPath() + "\\RackRepresentator_" + actualView.getName()
 							+ ".png";
 					file = new File(path);
 					ImageIO.write(bi, "PNG", file);
 					Console.info("saved file: " + path);
 				} else {
-					Console.error("Permission denied! please choose another directory.");
+					Console.error("Export: Permission denied! please choose another directory.");
 				}
 			}
 
