@@ -27,7 +27,7 @@ public class ServerDrawer implements IDrawer {
 
 			Graphics2D g2 = (Graphics2D) g.create();
 //			g2.setFont(new Font("TimesRoman", Font.PLAIN, 10)); 
-			Primitives.drawTextRotate(g2, server.getX()+TEXT_PADDING_VERTICAL_X, server.getY() + server.getHeight(), -90, server.getName(),
+			Primitives.drawTextRotate(g2, server.getX()+TEXT_PADDING_VERTICAL_X, server.getY() + server.getHeight(), -90, server.getModelBrand(),
 					Color.black);
 		} else
 			Utils.writeCenteredNameInDrawable(g, server, Color.BLACK);

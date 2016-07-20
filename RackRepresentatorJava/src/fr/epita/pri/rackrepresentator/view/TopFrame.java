@@ -39,6 +39,7 @@ public class TopFrame extends BaseFrame implements ActionListener {
 		btnBack.addActionListener(this);
 		add(btnBack);
 		
+		add(new JLabel(" "));
 		lblUpdateTime = new JLabel("Updated at");
 		add(lblUpdateTime);
 		updateTime();

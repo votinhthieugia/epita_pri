@@ -1,6 +1,9 @@
 package fr.epita.pri.rackrepresentator.view;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 public class ViewController implements IViewController {
 	private static ViewController instance;
@@ -60,6 +63,9 @@ public class ViewController implements IViewController {
 	
 	@Override
 	public void start() {
+		JFrame.setDefaultLookAndFeelDecorated(true);                   
+		SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ChallengerDeepSkin");
+		SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceBrownTheme");
 		SwingUtilities.invokeLater(new Runnable() {			      
 			@Override
 			public void run() {                
