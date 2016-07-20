@@ -101,7 +101,7 @@ public class MainFrame extends BaseFrame implements MouseListener {
 				File file = new File(chooser.getSelectedFile().getPath());
 				
 				if (Files.isWritable(file.toPath())) {
-					String path = chooser.getSelectedFile().getPath() + "\\RackRepresentator_" + actualView.getName()
+					String path = chooser.getSelectedFile().getPath() + File.separator + "RackRepresentator_" + actualView.getName()
 							+ ".png";
 					file = new File(path);
 					ImageIO.write(bi, "PNG", file);

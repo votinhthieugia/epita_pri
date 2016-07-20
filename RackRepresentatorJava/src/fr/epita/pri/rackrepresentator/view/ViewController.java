@@ -7,6 +7,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 
 public class ViewController implements IViewController {
 	private static ViewController instance;
+	private static final String APP_NAME = "DataCenter Automated Cartography tool";
 	
 	public static ViewController Instance() {
 		if (instance == null) {
@@ -27,13 +28,13 @@ public class ViewController implements IViewController {
 		if (views[viewId] != null) return views[viewId];
 		BaseView view = null;
 		switch (viewId) {
-		case ViewId.Login: view = new LoginView("Rack Representator - Login", this); break;
-		case ViewId.Main: view = new MainView("Rack Representator - Main", this); break;
-		case ViewId.ManageUser: view = new ManageUserView("Rack Representator - Manage User", this); break;
-		case ViewId.ManageDrawable: view = new ManageDrawableView("Rack Representator - Manage Drawable", this); break;
-		case ViewId.Setting: view = new SettingView("Rack Representator - Setting", this); break;
-		case ViewId.About: view = new AboutView("Rack Representator - About Us", this); break;
-		case ViewId.OpenFile: view = new OpenFileView("Rack Representator - Open File", this); break;
+		case ViewId.Login: view = new LoginView(APP_NAME + " - Login", this); break;
+		case ViewId.Main: view = new MainView(APP_NAME + " - Main", this); break;
+		case ViewId.ManageUser: view = new ManageUserView(APP_NAME + " - Manage User", this); break;
+		case ViewId.ManageDrawable: view = new ManageDrawableView(APP_NAME + " - Manage Drawable", this); break;
+		case ViewId.Setting: view = new SettingView(APP_NAME + " - Setting", this); break;
+		case ViewId.About: view = new AboutView(APP_NAME + " - About Us", this); break;
+		case ViewId.OpenFile: view = new OpenFileView(APP_NAME + " - Open File", this); break;
 		default: break;
 		}
 		return view;
