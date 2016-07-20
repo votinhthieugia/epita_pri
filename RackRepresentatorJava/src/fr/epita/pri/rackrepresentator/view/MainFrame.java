@@ -129,6 +129,8 @@ public class MainFrame extends BaseFrame implements MouseListener {
 			if (timer != null) timer.cancel();
 			timer = new Timer(true);
 			timer.scheduleAtFixedRate(task, Setting.Instance().getReloadTime() * 1000, Setting.Instance().getReloadTime() * 1000);
+		} else if (timer != null) {
+			timer.cancel();
 		}
 	}
 	
